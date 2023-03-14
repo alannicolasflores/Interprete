@@ -6,7 +6,9 @@
 package Administrador;
 
 
-public class TipoToken {
+public enum TipoToken {
+
+    
     // Crear un tipoToken por palabra reservada
     // Crear un tipoToken: identificador, una cadena y numero
     // Crear un tipoToken por cada "Signo del lenguaje" (ver clase Scanner)

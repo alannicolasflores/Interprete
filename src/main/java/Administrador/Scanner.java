@@ -1,5 +1,6 @@
 
 package Administrador;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -83,8 +84,10 @@ public class Scanner {
     List<Token> scanTokens(){
         //Aquí va el corazón del scanner.
         int i= 0;
-        int j=0;
-
+        int j=source.length();
+        while (source.charAt(i)!= j ) {
+            
+        }
         if("a"== source.substring(1)){
            
             if("and"==source.substring(1, 3)){
@@ -96,6 +99,11 @@ public class Scanner {
                 i=i+4;
             } 
         }
+        if ("class"== source.substring(1, 5)) {
+            tokens.add(new Token(TipoToken.CLASS, "class", palabrasReservadas, linea++));
+            i=i+5;
+        }
+
                
         if ("(" == source) {
             tokens.add(new Token(TipoToken.PAR1, "(",simbolos, linea++));    

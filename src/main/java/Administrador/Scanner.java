@@ -101,7 +101,7 @@ public class Scanner {
                 linea=linea+5;
             }
             
-            if("f".equals( source.substring(linea-1)))
+            if("f".equals( source.substring(linea-1))){
                 if ("false".equals( source.substring(linea-1, linea+4))) {
                     tokens.add(new Token(TipoToken.FALSE, "false", "palabrasReservadas", linea));
                     linea=linea+5;
@@ -109,6 +109,7 @@ public class Scanner {
                     tokens.add(new Token(TipoToken.FUN, "fun", "palabrasReservadas", linea));
                     linea=linea+3;
                 }
+            }
              
                    
             if ("(" .equals( source.substring(linea-1))) {
@@ -129,10 +130,7 @@ public class Scanner {
             if(".".equals(source.substring(linea-1))){
                 tokens.add(new Token(TipoToken.PUNTO, ".","simbolos", linea++));
             }
-            if("}".equals(source.substring(linea-1))){
-                tokens.add(new Token(TipoToken.LLAVE2, "}","simbolos", linea++));
-            }
-            
+
             
             
         

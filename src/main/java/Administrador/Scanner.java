@@ -59,7 +59,7 @@ public class Scanner {
         
     }
 
-    private static final Map<Integer, TipoToken> numeros;
+    /*private static final Map<Integer, TipoToken> numeros;
     static{
         numeros = new HashMap<>();
         numeros.put(0, TipoToken.CERO);
@@ -72,7 +72,7 @@ public class Scanner {
         numeros.put(7, TipoToken.SIETE);
         numeros.put(8, TipoToken.OCHO);
         numeros.put(9, TipoToken.NUEVE);
-    }
+    }*/
 
     Scanner(String source){
         this.source = source;
@@ -82,6 +82,42 @@ public class Scanner {
 
     List<Token> scanTokens(){
         //Aquí va el corazón del scanner.
+        int i= 0;
+        int j=0;
+
+        if("a"== source.substring(1)){
+           
+            if("and"==source.substring(1, 3)){
+                tokens.add(new Token(TipoToken.AND, "and",palabrasReservadas, linea++));
+                i=i+3;
+            }
+            if("also"==source.substring(1, 4)){
+                tokens.add(new Token(TipoToken.ALSO, "also",palabrasReservadas, linea++));
+                i=i+4;
+            } 
+        }
+               
+        if ("(" == source) {
+            tokens.add(new Token(TipoToken.PAR1, "(",simbolos, linea++));    
+        }
+        if (")" == source) {
+            tokens.add(new Token(TipoToken.PAR2, ")",simbolos, linea++));    
+        }
+        if("{"==source){
+            tokens.add(new Token(TipoToken.LLAVE1, "{",simbolos, linea++));
+        }
+        if("}"==source){
+            tokens.add(new Token(TipoToken.LLAVE2, "}",simbolos, linea++));
+        }
+        if(","==source){
+            tokens.add(new Token(TipoToken.COMA, ",",simbolos, linea++));
+        }        
+        if("."==source){
+            tokens.add(new Token(TipoToken.PUNTO, ".",simbolos, linea++));
+        }
+        if("}"==source){
+            tokens.add(new Token(TipoToken.LLAVE2, "}",simbolos, linea++));
+        }
 
         /*
         Analizar el texto de entrada para extraer todos los tokens

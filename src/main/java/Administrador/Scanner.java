@@ -17,22 +17,22 @@ public class Scanner {
     private static final Map<String, TipoToken> palabrasReservadas;
     static {
         palabrasReservadas = new HashMap<>();
-        palabrasReservadas.put("and", TipoToken.AND);
-        palabrasReservadas.put("class", TipoToken.CLASS);
-        palabrasReservadas.put("also", TipoToken.ALSO);
-        palabrasReservadas.put("false", TipoToken.FALSE );
+        palabrasReservadas.put("and", TipoToken.AND);//
+        palabrasReservadas.put("class", TipoToken.CLASS);//
+        palabrasReservadas.put("also", TipoToken.ALSO);//
+        palabrasReservadas.put("false", TipoToken.FALSE );//
         palabrasReservadas.put("to", TipoToken.TO);
         palabrasReservadas.put("fun", TipoToken.FUN); //definir funciones
-        palabrasReservadas.put("if", TipoToken.IF);
-        palabrasReservadas.put("null", TipoToken.NULL);
-        palabrasReservadas.put("or", TipoToken.OR);
-        palabrasReservadas.put("print", TipoToken.PRINT);
-        palabrasReservadas.put("return", TipoToken.RETURN);
-        palabrasReservadas.put("super", TipoToken.SUPER);
+        palabrasReservadas.put("if", TipoToken.IF);//
+        palabrasReservadas.put("null", TipoToken.NULL);//
+        palabrasReservadas.put("or", TipoToken.OR);//
+        palabrasReservadas.put("print", TipoToken.PRINT);//
+        palabrasReservadas.put("return", TipoToken.RETURN);//
+        palabrasReservadas.put("super", TipoToken.SUPER);//
         palabrasReservadas.put("this", TipoToken.THIS);
         palabrasReservadas.put("true", TipoToken.TRUE);
         palabrasReservadas.put("var", TipoToken.VAR); //definir variables
-        palabrasReservadas.put("while", TipoToken.WHILE);
+        palabrasReservadas.put("while", TipoToken.WHILE);//
     }
     
     private static final Map<String, TipoToken> simbolos;
@@ -86,8 +86,73 @@ public class Scanner {
         
         while (linea-1<source.length()){
 
-            if ("class" .equals(source)){
-                tokens.add(new Token(TipoToken.CLASS, "CLASS","Palabra reservada", linea++));
+            // if("a".equals( source.substring(linea-1, linea))){
+           
+            //     if("and".equals(source.substring(linea-1))){
+            //         tokens.add(new Token(TipoToken.AND, "and","palabrasReservadas", linea));
+            //         linea=linea+3;
+            //     }else if("also".equals(source.substring(linea-1))){
+            //         tokens.add(new Token(TipoToken.ALSO, "also","palabrasReservadas", linea));
+            //         linea=linea+4;
+            //     } 
+            // }
+            // if ("class" .equals(source)){
+            //     tokens.add(new Token(TipoToken.CLASS, "class","Palabra reservada", linea));
+            //     linea= linea+5;
+            // }
+            
+            if("f".equals( source.substring(linea-1, linea))){
+                if ("false".equals( source.substring(linea-1))) {
+                    tokens.add(new Token(TipoToken.FALSE, "false", "palabrasReservadas", linea));
+                    linea=linea+5;
+                }else if("fun".equals( source.substring(linea-1))){
+                    tokens.add(new Token(TipoToken.FUN, "fun", "palabrasReservadas", linea));
+                    linea=linea+3;
+                }
+            }
+            if ("if" .equals(source)){
+                tokens.add(new Token(TipoToken.IF, "if","Palabra reservada", linea));
+                linea= linea+2;
+            }
+            if ("null" .equals(source)){
+                tokens.add(new Token(TipoToken.NULL, "null","Palabra reservada", linea));
+                linea= linea+4;
+            }
+            if ("or" .equals(source)){
+                tokens.add(new Token(TipoToken.OR, "or","Palabra reservada", linea));
+                linea= linea+2;
+            }
+            if ("print" .equals(source)){
+                tokens.add(new Token(TipoToken.PRINT, "print","Palabra reservada", linea));
+                linea= linea+5;
+            }
+            // if ("return" .equals(source)){
+            //     tokens.add(new Token(TipoToken.RETURN, "return","Palabra reservada", linea));
+            //     linea= linea+6;
+            // }
+            // if ("super" .equals(source)){
+            //     tokens.add(new Token(TipoToken.SUPER, "super","Palabra reservada", linea));
+            //     linea= linea+5;
+            // }
+            // if("t".equals( source.substring(linea-1, linea))){
+            //     if ("this".equals( source.substring(linea-1))) {
+            //         tokens.add(new Token(TipoToken.THIS, "this", "palabrasReservadas", linea));
+            //         linea=linea+4;
+            //     }else if("fun".equals( source.substring(linea-1))){
+            //         tokens.add(new Token(TipoToken.FUN, "fun", "palabrasReservadas", linea));
+            //         linea=linea+3;
+            //     }else if("true".equals(source.substring(linea-1))){
+            //         tokens.add(new Token(TipoToken.TRUE,"true","palabrasReservadas",linea));
+            //         linea=linea+4;
+            //     }
+            // }
+            if ("var".equals(source)){
+                tokens.add(new Token(TipoToken.VAR, "var","Palabra reservada", linea));
+                linea= linea+3;
+            }
+            if ("while" .equals(source)){
+                tokens.add(new Token(TipoToken.WHILE, "while","Palabra reservada", linea));
+                linea= linea+5;
             }
             if ("(" .equals( source.substring(linea-1))) {
                 tokens.add(new Token(TipoToken.PAR1, "(","simbolos", linea++));    
@@ -126,25 +191,29 @@ public class Scanner {
                 tokens.add(new Token(TipoToken.NEG, "!","simbolos", linea++));
             }
             if("!=".equals(source.substring(linea-1))){
-                tokens.add(new Token(TipoToken.COMP, "!=","simbolos", linea++));
+                tokens.add(new Token(TipoToken.COMP, "!=","simbolos", linea));
+                linea=linea+2;
             }
             if("=".equals(source.substring(linea-1))){
                 tokens.add(new Token(TipoToken.IGUAL1, "=","simbolos", linea++));
             }
             if("==".equals(source.substring(linea-1))){
-                tokens.add(new Token(TipoToken.IGUAL2, "==","simbolos", linea++));
+                tokens.add(new Token(TipoToken.IGUAL2, "==","simbolos", linea));
+                linea=linea+2;
             }
             if("<".equals(source.substring(linea-1))){
                 tokens.add(new Token(TipoToken.MENOR, "<","simbolos", linea++));
             }
             if("<=".equals(source.substring(linea-1))){
                 tokens.add(new Token(TipoToken.MENORI, "<=","simbolos", linea++));
+                linea=linea+2;
             }
             if(">".equals(source.substring(linea-1))){
                 tokens.add(new Token(TipoToken.MAYOR, ">","simbolos", linea++));
             }
             if(">=".equals(source.substring(linea-1))){
                 tokens.add(new Token(TipoToken.MAYORI, ">=","simbolos", linea++));
+                linea=linea+2;
             }
         }
 

@@ -174,67 +174,6 @@ public class Scanner {
                 }else
                 tokens.add(new Token(TipoToken.NEG, "!", "simbolos", linea++));
             }        
-            
-            
-            // if ("class" .equals(source)){
-            //     tokens.add(new Token(TipoToken.CLASS, "class","Palabra reservada", linea));
-            //     linea= linea+5;
-            // }
-            
-            // if("f".equals( source.substring(linea-1, linea))){
-            //     if ("false".equals( source.substring(linea-1))) {
-            //         tokens.add(new Token(TipoToken.FALSE, "false", "palabrasReservadas", linea));
-            //         linea=linea+5;
-            //     }else if("fun".equals( source.substring(linea-1))){
-            //         tokens.add(new Token(TipoToken.FUN, "fun", "palabrasReservadas", linea));
-            //         linea=linea+3;
-            //     }
-            // }
-            // if ("if" .equals(source)){
-            //     tokens.add(new Token(TipoToken.IF, "if","Palabra reservada", linea));
-            //     linea= linea+2;
-            // }
-            // if ("null" .equals(source)){
-            //     tokens.add(new Token(TipoToken.NULL, "null","Palabra reservada", linea));
-            //     linea= linea+4;
-            // }
-            // if ("or" .equals(source)){
-            //     tokens.add(new Token(TipoToken.OR, "or","Palabra reservada", linea));
-            //     linea= linea+2;
-            // }
-            // if ("print" .equals(source)){
-            //     tokens.add(new Token(TipoToken.PRINT, "print","Palabra reservada", linea));
-            //     linea= linea+5;
-            // }
-            // // if ("return" .equals(source)){
-            // //     tokens.add(new Token(TipoToken.RETURN, "return","Palabra reservada", linea));
-            // //     linea= linea+6;
-            // // }
-            // if ("super" .equals(source.substring(linea+4))){
-            //     tokens.add(new Token(TipoToken.SUPER, "super","Palabra reservada", linea));
-            //     linea= linea+5;
-            // }
-            // if("t".equals( source.substring(linea-1, linea))){
-            //     if ("this".equals( source.substring(linea-1))) {
-            //         tokens.add(new Token(TipoToken.THIS, "this", "palabrasReservadas", linea));
-            //         linea=linea+4;
-                    
-            //     }else if("to".equals( source.substring(linea-1))){
-            //         tokens.add(new Token(TipoToken.TO, "to", "palabrasReservadas", linea));
-            //         linea=linea+2;
-            //     }else if("true".equals(source.substring(linea-1))){
-            //         tokens.add(new Token(TipoToken.TRUE,"true","palabrasReservadas",linea));
-            //         linea=linea+4;
-            //     }
-            // }
-            // if ("var".equals(source.substring(linea-1,linea+2))){
-            //     tokens.add(new Token(TipoToken.VAR, "var","Palabra reservada", linea));
-            //     linea= linea+3;
-            // }
-            // if ("while".equals(source.substring(linea-1, linea+4))){
-            //     tokens.add(new Token(TipoToken.WHILE, "while","Palabra reservada", linea));
-            //     linea= linea+5;
-            // } 
             else
             if (source.charAt(linea-1) == '(') {
                 tokens.add(new Token(TipoToken.PAR1, "(","simbolos", linea));    

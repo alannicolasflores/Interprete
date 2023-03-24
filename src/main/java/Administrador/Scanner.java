@@ -97,25 +97,27 @@ public class Scanner {
          System.out.println(i);
          while (linea-1<i){
 
-            // if('a'==(source.charAt(linea-1))){
-           
-            //     if("and".equals(source.substring(linea-1,linea+2))){
-            //         tokens.add(new Token(TipoToken.AND, "and","palabrasReservadas", linea));
-            //         linea=linea+3;
-            //     } 
-                
-            //     if("also".equals(source.substring(linea-1,linea+3))){
-            //         tokens.add(new Token(TipoToken.ALSO, "also","palabrasReservadas", linea));
-            //         linea=linea+4;
-            //     } 
-            // }
+        if (source.charAt(linea-1) == 'a' && source.charAt(linea) == 'n' && source.charAt(linea+1) == 'd') {
+            tokens.add(new Token(TipoToken.AND, "and", "Palabra reservada", linea));
+            linea = linea + 3;
             
-               if (source.charAt(linea-1) == 'c' && source.charAt(linea) == 'l' && source.charAt(linea+1) == 'a' && source.charAt(linea+2) == 's' && source.charAt(linea+3) == 's') {
-                    tokens.add(new Token(TipoToken.CLASS, "class","Palabra reservada", linea));
-                    linea=linea+5;
-                    System.out.println(linea);
-                    break;
-                }
+        }else
+        if (source.charAt(linea-1) == 'a' && source.charAt(linea) == 'l' && source.charAt(linea+1) == 's' && source.charAt(linea+2) == 'o') {
+            tokens.add(new Token(TipoToken.ALSO, "also", "Palabra reservada", linea));
+            linea = linea + 4;
+        }else
+        
+        if (source.charAt(linea-1) == 'c' && source.charAt(linea) == 'l' && source.charAt(linea+1) == 'a' && source.charAt(linea+2) == 's' && source.charAt(linea+3) == 's') {
+             tokens.add(new Token(TipoToken.CLASS, "class","Palabra reservada", linea));
+             linea=linea+5;
+        }else 
+        if (source.charAt(linea-1) == '!') {
+                if (source.charAt(linea-1) == '!' && source.charAt(linea)=='=') {
+                    tokens.add(new Token(TipoToken.COMP, "!=", "simbolos", linea));
+                    linea=linea+2;
+                }else
+                tokens.add(new Token(TipoToken.NEG, "!", "simbolos", linea++));
+            }        
             
             
             // if ("class" .equals(source)){
@@ -177,69 +179,63 @@ public class Scanner {
             //     tokens.add(new Token(TipoToken.WHILE, "while","Palabra reservada", linea));
             //     linea= linea+5;
             // } 
-            if (source.charAt(linea-1) == '(') {
-                tokens.add(new Token(TipoToken.PAR1, "(","simbolos", linea));    
-                linea++;
-            }
+        //     if (source.charAt(linea-1) == '(') {
+        //         tokens.add(new Token(TipoToken.PAR1, "(","simbolos", linea));    
+        //         linea++;
+        //     }
             
-            if (source.charAt(linea-1) == ')') {
-                tokens.add(new Token(TipoToken.PAR2, ")", "simbolos", linea++));    
-            }
-            if (source.charAt(linea-1) == '{') {
-                tokens.add(new Token(TipoToken.LLAVE1, "{", "simbolos", linea++));
-            }
-            if (source.charAt(linea-1) == '}') {
-                tokens.add(new Token(TipoToken.LLAVE2, "}", "simbolos", linea++));
-            }
-            if (source.charAt(linea-1) == ',') {
-                tokens.add(new Token(TipoToken.COMA, ",", "simbolos", linea++));
-            }        
-            if (source.charAt(linea-1) == '.') {
-                tokens.add(new Token(TipoToken.PUNTO, ".", "simbolos", linea++));
-            }
-            if (source.charAt(linea-1) == ';') {
-                tokens.add(new Token(TipoToken.PCOMA, ";", "simbolos", linea++));
-            }
-            if (source.charAt(linea-1) == '-') {
-                tokens.add(new Token(TipoToken.MENOS, "-", "simbolos", linea++));
-            }
-            if (source.charAt(linea-1) == '+') {
-                tokens.add(new Token(TipoToken.MAS, "+", "simbolos", linea++));
-            }
-            if (source.charAt(linea-1) == '*') {
-                tokens.add(new Token(TipoToken.POR, "*", "simbolos", linea++));
-            }
-            if (source.charAt(linea-1) == '/') {
-                tokens.add(new Token(TipoToken.DIAG, "/", "simbolos", linea++));
-            }
-            if (source.charAt(linea-1) == '!' && source.charAt(linea)=='=') {
-                tokens.add(new Token(TipoToken.COMP, "!=", "simbolos", linea));
-                linea=linea+2;
-            }
-            if (source.charAt(linea-1) == '!') {
-                tokens.add(new Token(TipoToken.NEG, "!", "simbolos", linea++));
-            }
-            if (source.charAt(linea-1) == '=' && source.charAt(linea)== '=') {
-                tokens.add(new Token(TipoToken.IGUAL2, "==", "simbolos", linea));
-                linea=linea+2;
-            }
-            if (source.charAt(linea-1) == '=') {
-                tokens.add(new Token(TipoToken.IGUAL1, "=", "simbolos", linea++));
-             }
-             if (source.charAt(linea-1) == '<' && source.charAt(linea)=='=') {
-                tokens.add(new Token(TipoToken.MENORI, "<=", "simbolos", linea));
-                linea=linea+2;
-            }
-            if (source.charAt(linea-1) == '<') {
-                tokens.add(new Token(TipoToken.MENOR, "<", "simbolos", linea++));
-            }
-            if (source.charAt(linea-1) == '>' && source.charAt(linea)=='=') {
-                tokens.add(new Token(TipoToken.MAYORI, ">=", "simbolos", linea));
-                linea=linea+2;
-            }
-            if (source.charAt(linea-1) == '>') {
-                tokens.add(new Token(TipoToken.MAYOR, ">", "simbolos", linea++));
-            }
+        //     if (source.charAt(linea-1) == ')') {
+        //         tokens.add(new Token(TipoToken.PAR2, ")", "simbolos", linea++));    
+        //     }
+        //     if (source.charAt(linea-1) == '{') {
+        //         tokens.add(new Token(TipoToken.LLAVE1, "{", "simbolos", linea++));
+        //     }
+        //     if (source.charAt(linea-1) == '}') {
+        //         tokens.add(new Token(TipoToken.LLAVE2, "}", "simbolos", linea++));
+        //     }
+        //     if (source.charAt(linea-1) == ',') {
+        //         tokens.add(new Token(TipoToken.COMA, ",", "simbolos", linea++));
+        //     }        
+        //     if (source.charAt(linea-1) == '.') {
+        //         tokens.add(new Token(TipoToken.PUNTO, ".", "simbolos", linea++));
+        //     }
+        //     if (source.charAt(linea-1) == ';') {
+        //         tokens.add(new Token(TipoToken.PCOMA, ";", "simbolos", linea++));
+        //     }
+        //     if (source.charAt(linea-1) == '-') {
+        //         tokens.add(new Token(TipoToken.MENOS, "-", "simbolos", linea++));
+        //     }
+        //     if (source.charAt(linea-1) == '+') {
+        //         tokens.add(new Token(TipoToken.MAS, "+", "simbolos", linea++));
+        //     }
+        //     if (source.charAt(linea-1) == '*') {
+        //         tokens.add(new Token(TipoToken.POR, "*", "simbolos", linea++));
+        //     }
+        //     if (source.charAt(linea-1) == '/') {
+        //         tokens.add(new Token(TipoToken.DIAG, "/", "simbolos", linea++));
+        //     }
+
+        //     if (source.charAt(linea-1) == '=' && source.charAt(linea)== '=') {
+        //         tokens.add(new Token(TipoToken.IGUAL2, "==", "simbolos", linea));
+        //         linea=linea+2;
+        //     }
+        //     if (source.charAt(linea-1) == '=') {
+        //         tokens.add(new Token(TipoToken.IGUAL1, "=", "simbolos", linea++));
+        //      }
+        //      if (source.charAt(linea-1) == '<' && source.charAt(linea)=='=') {
+        //         tokens.add(new Token(TipoToken.MENORI, "<=", "simbolos", linea));
+        //         linea=linea+2;
+        //     }
+        //     if (source.charAt(linea-1) == '<') {
+        //         tokens.add(new Token(TipoToken.MENOR, "<", "simbolos", linea++));
+        //     }
+        //     if (source.charAt(linea-1) == '>' && source.charAt(linea)=='=') {
+        //         tokens.add(new Token(TipoToken.MAYORI, ">=", "simbolos", linea));
+        //         linea=linea+2;
+        //     }
+        //     if (source.charAt(linea-1) == '>') {
+        //         tokens.add(new Token(TipoToken.MAYOR, ">", "simbolos", linea++));
+        //     }
            
         }
         /* 
@@ -284,5 +280,4 @@ Identificador,
 Cadena
 Numero
 Cada palabra reservada tiene su nombre de token
-
  */

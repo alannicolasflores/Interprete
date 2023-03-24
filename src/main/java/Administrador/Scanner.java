@@ -110,7 +110,7 @@ public class Scanner {
             //     } 
             // }
             
-                if (source.charAt(linea-1) == 'c' && source.charAt(linea) == 'l' && source.charAt(linea+1) == 'a' && source.charAt(linea+2) == 's' && source.charAt(linea+3) == 's') {
+               if (source.charAt(linea-1) == 'c' && source.charAt(linea) == 'l' && source.charAt(linea+1) == 'a' && source.charAt(linea+2) == 's' && source.charAt(linea+3) == 's') {
                     tokens.add(new Token(TipoToken.CLASS, "class","Palabra reservada", linea));
                     linea=linea+5;
                     System.out.println(linea);
@@ -212,34 +212,35 @@ public class Scanner {
             if (source.charAt(linea-1) == '/') {
                 tokens.add(new Token(TipoToken.DIAG, "/", "simbolos", linea++));
             }
+            if (source.charAt(linea-1) == '!' && source.charAt(linea)=='=') {
+                tokens.add(new Token(TipoToken.COMP, "!=", "simbolos", linea));
+                linea=linea+2;
+            }
             if (source.charAt(linea-1) == '!') {
                 tokens.add(new Token(TipoToken.NEG, "!", "simbolos", linea++));
             }
-            if ("!=".equals(source.substring(linea-1, linea))) {
-                tokens.add(new Token(TipoToken.COMP, "!=", "simbolos", linea));
+            if (source.charAt(linea-1) == '=' && source.charAt(linea)== '=') {
+                tokens.add(new Token(TipoToken.IGUAL2, "==", "simbolos", linea));
                 linea=linea+2;
             }
             if (source.charAt(linea-1) == '=') {
                 tokens.add(new Token(TipoToken.IGUAL1, "=", "simbolos", linea++));
-            }
-            if ("==".equals(source.substring(linea-1, linea))) {
-                tokens.add(new Token(TipoToken.IGUAL2, "==", "simbolos", linea));
+             }
+             if (source.charAt(linea-1) == '<' && source.charAt(linea)=='=') {
+                tokens.add(new Token(TipoToken.MENORI, "<=", "simbolos", linea));
                 linea=linea+2;
             }
             if (source.charAt(linea-1) == '<') {
                 tokens.add(new Token(TipoToken.MENOR, "<", "simbolos", linea++));
             }
-            if ("<=".equals(source.substring(linea-1, linea))) {
-                tokens.add(new Token(TipoToken.MENORI, "<=", "simbolos", linea++));
+            if (source.charAt(linea-1) == '>' && source.charAt(linea)=='=') {
+                tokens.add(new Token(TipoToken.MAYORI, ">=", "simbolos", linea));
                 linea=linea+2;
             }
             if (source.charAt(linea-1) == '>') {
                 tokens.add(new Token(TipoToken.MAYOR, ">", "simbolos", linea++));
             }
-            if (">=".equals(source.substring(linea-1, linea))) {
-                tokens.add(new Token(TipoToken.MAYORI, ">=", "simbolos", linea++));
-                linea=linea+2;
-            }
+           
         }
         /* 
         Analizar el texto de entrada para extraer todos los tokens

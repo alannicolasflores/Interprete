@@ -235,63 +235,78 @@ public class Scanner {
             //     tokens.add(new Token(TipoToken.WHILE, "while","Palabra reservada", linea));
             //     linea= linea+5;
             // } 
-        //     if (source.charAt(linea-1) == '(') {
-        //         tokens.add(new Token(TipoToken.PAR1, "(","simbolos", linea));    
-        //         linea++;
-        //     }
+            else
+            if (source.charAt(linea-1) == '(') {
+                tokens.add(new Token(TipoToken.PAR1, "(","simbolos", linea));    
+                linea++;
+            }else
             
-        //     if (source.charAt(linea-1) == ')') {
-        //         tokens.add(new Token(TipoToken.PAR2, ")", "simbolos", linea++));    
-        //     }
-        //     if (source.charAt(linea-1) == '{') {
-        //         tokens.add(new Token(TipoToken.LLAVE1, "{", "simbolos", linea++));
-        //     }
-        //     if (source.charAt(linea-1) == '}') {
-        //         tokens.add(new Token(TipoToken.LLAVE2, "}", "simbolos", linea++));
-        //     }
-        //     if (source.charAt(linea-1) == ',') {
-        //         tokens.add(new Token(TipoToken.COMA, ",", "simbolos", linea++));
-        //     }        
-        //     if (source.charAt(linea-1) == '.') {
-        //         tokens.add(new Token(TipoToken.PUNTO, ".", "simbolos", linea++));
-        //     }
-        //     if (source.charAt(linea-1) == ';') {
-        //         tokens.add(new Token(TipoToken.PCOMA, ";", "simbolos", linea++));
-        //     }
-        //     if (source.charAt(linea-1) == '-') {
-        //         tokens.add(new Token(TipoToken.MENOS, "-", "simbolos", linea++));
-        //     }
-        //     if (source.charAt(linea-1) == '+') {
-        //         tokens.add(new Token(TipoToken.MAS, "+", "simbolos", linea++));
-        //     }
-        //     if (source.charAt(linea-1) == '*') {
-        //         tokens.add(new Token(TipoToken.POR, "*", "simbolos", linea++));
-        //     }
-        //     if (source.charAt(linea-1) == '/') {
-        //         tokens.add(new Token(TipoToken.DIAG, "/", "simbolos", linea++));
-        //     }
-
-        //     if (source.charAt(linea-1) == '=' && source.charAt(linea)== '=') {
-        //         tokens.add(new Token(TipoToken.IGUAL2, "==", "simbolos", linea));
-        //         linea=linea+2;
-        //     }
-        //     if (source.charAt(linea-1) == '=') {
-        //         tokens.add(new Token(TipoToken.IGUAL1, "=", "simbolos", linea++));
-        //      }
-        //      if (source.charAt(linea-1) == '<' && source.charAt(linea)=='=') {
-        //         tokens.add(new Token(TipoToken.MENORI, "<=", "simbolos", linea));
-        //         linea=linea+2;
-        //     }
-        //     if (source.charAt(linea-1) == '<') {
-        //         tokens.add(new Token(TipoToken.MENOR, "<", "simbolos", linea++));
-        //     }
-        //     if (source.charAt(linea-1) == '>' && source.charAt(linea)=='=') {
-        //         tokens.add(new Token(TipoToken.MAYORI, ">=", "simbolos", linea));
-        //         linea=linea+2;
-        //     }
-        //     if (source.charAt(linea-1) == '>') {
-        //         tokens.add(new Token(TipoToken.MAYOR, ">", "simbolos", linea++));
-        //     }
+            if (source.charAt(linea-1) == ')') {
+                tokens.add(new Token(TipoToken.PAR2, ")", "simbolos", linea++));    
+            } else
+            if (source.charAt(linea-1) == '{') {
+                tokens.add(new Token(TipoToken.LLAVE1, "{", "simbolos", linea++));
+            } else
+            if (source.charAt(linea-1) == '}') {
+                tokens.add(new Token(TipoToken.LLAVE2, "}", "simbolos", linea++));
+            } else
+            if (source.charAt(linea-1) == ',') {
+                tokens.add(new Token(TipoToken.COMA, ",", "simbolos", linea++));
+            } else       
+            if (source.charAt(linea-1) == '.') {
+                tokens.add(new Token(TipoToken.PUNTO, ".", "simbolos", linea++));
+            } else
+            if (source.charAt(linea-1) == ';') {
+                tokens.add(new Token(TipoToken.PCOMA, ";", "simbolos", linea++));
+            } else
+            if (source.charAt(linea-1) == '-') {
+                tokens.add(new Token(TipoToken.MENOS, "-", "simbolos", linea++));
+            } else
+            if (source.charAt(linea-1) == '+') {
+                tokens.add(new Token(TipoToken.MAS, "+", "simbolos", linea++));
+            } else
+            if (source.charAt(linea-1) == '*') {
+                tokens.add(new Token(TipoToken.POR, "*", "simbolos", linea++));
+            } else
+            if (source.charAt(linea-1) == '/') {
+                tokens.add(new Token(TipoToken.DIAG, "/", "simbolos", linea++));
+            } else
+            
+            if (source.charAt(linea-1) == '!') {
+                if (source.charAt(linea-1) == '!' && source.charAt(linea)=='=') {
+                    tokens.add(new Token(TipoToken.COMP, "!=", "simbolos", linea));
+                    linea=linea+2;
+                } else
+                tokens.add(new Token(TipoToken.NEG, "!", "simbolos", linea++));
+            } else
+           
+            if (source.charAt(linea-1) == '=') {
+                //tokens.add(new Token(TipoToken.IGUAL1, "=", "simbolos", linea++));
+                if (source.charAt(linea-1)== '=' && source.charAt(linea)=='=') {
+                    tokens.add(new Token(TipoToken.IGUAL2, "==", "simbolos", linea));
+                    linea=linea+2;
+                }
+                else
+                tokens.add(new Token(TipoToken.IGUAL1, "=", "simbolos", linea++));
+             } else
+             
+            if (source.charAt(linea-1) == '<') {
+                if (source.charAt(linea-1) == '<' && source.charAt(linea)=='=') {
+                    tokens.add(new Token(TipoToken.MENORI, "<=", "simbolos", linea));
+                    linea=linea+2;
+                } else
+                tokens.add(new Token(TipoToken.MENOR, "<", "simbolos", linea++));
+            } else
+            
+            if (source.charAt(linea-1) == '>') {
+                if (source.charAt(linea-1) == '>' && source.charAt(linea)=='=') {
+                    tokens.add(new Token(TipoToken.MAYORI, ">=", "simbolos", linea));
+                    linea=linea+2;
+                } else
+                tokens.add(new Token(TipoToken.MAYOR, ">", "simbolos", linea++));
+            }
+           
+        
            
         }
         /* 

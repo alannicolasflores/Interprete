@@ -323,6 +323,13 @@ public class Scanner {
                     linea=linea+2;
                 } else
                 tokens.add(new Token(TipoToken.MAYOR, ">", "simbolos", linea++));
+            }else
+
+            if (!Character.isLetter(source.charAt(linea-1))) {
+
+                tokens.add(new Token(TipoToken.IDENTIFICADOR, ">", "simbolos", linea++));
+            }else if (!Character.isDigit(source.charAt(linea-1))) {
+                tokens.add(new Token(TipoToken.NUEVE, ">", "simbolos", linea++));
             }
 
         }

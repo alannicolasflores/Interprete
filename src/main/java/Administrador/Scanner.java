@@ -96,7 +96,9 @@ public class Scanner {
          System.out.println("tamaño");
          System.out.println(i);
          while (linea-1<i){
-
+        if (linea-1 < source.length() && source.charAt(linea-1) == ' ') {
+            linea++;
+        }else
         if (source.charAt(linea-1) == 'a' && source.charAt(linea) == 'n' && source.charAt(linea+1) == 'd') {
             tokens.add(new Token(TipoToken.AND, "and", "Palabra reservada", linea));
             linea = linea + 3;
@@ -244,9 +246,7 @@ public class Scanner {
                 } else
                 tokens.add(new Token(TipoToken.MAYOR, ">", "simbolos", linea++));
             }
-           
-        
-           
+
         }
         /* 
         Analizar el texto de entrada para extraer todos los tokens

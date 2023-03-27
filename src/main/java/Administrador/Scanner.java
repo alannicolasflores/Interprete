@@ -308,18 +308,25 @@ public class Scanner {
             }else
             if (source.charAt(linea-1) == '"') {
                 String aux = "";
-
-                while((linea-1 < source.length()) && Character.isDigit(source.charAt(linea-1))) {
+                
+                System.out.println(linea);
+                System.out.println(aux);
+                while (linea < source.length() && source.charAt(linea) != '"') {
+                    linea++;
                     aux = aux.concat(String.valueOf(source.charAt(linea-1)));
-                     if (source.charAt(linea) == '"') { // Verifica si el siguiente carácter no es un número
-                        
-                        tokens.add(new Token(TipoToken.CADENA, aux, aux, linea++));
-                        break;
-                    }
-
-                 linea++;
+                    
+                    System.out.println(linea);
+                    System.out.println(aux);
+                    
                 }
-            }else
+                System.out.println(linea);
+                System.out.println(aux);
+                linea++; // Salta la comilla de cierre
+                tokens.add(new Token(TipoToken.CADENA, aux, aux, linea-1)); 
+            }
+            
+                
+            
             if(Character.isLetter(source.charAt(linea-1)) || Character.isDigit(source.charAt(linea-1))){    
                 String aux = "";
                 while((linea-1 < source.length()) && Character.isLetter(source.charAt(linea-1))) {

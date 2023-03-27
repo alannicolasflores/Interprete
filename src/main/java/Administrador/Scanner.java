@@ -1,3 +1,4 @@
+
 package Administrador;
 
 import java.net.SocketPermission;
@@ -262,11 +263,11 @@ public class Scanner {
                 }else if(source.charAt(linea) == '*'){
                     linea=linea+2;
                     System.out.println(linea);
-                    while(!(source.charAt(linea-1) == '*') && !(source.charAt(linea+1) == '/')){
+                    while(!(source.charAt(linea) == '*') && !(source.charAt(linea+1) == '/')){
                             linea++;
                             System.out.println(linea);
                     }
-                    linea++;
+                    
                 }else 
                 
                 tokens.add(new Token(TipoToken.DIAG, "/", "simbolos", linea++));
@@ -305,12 +306,51 @@ public class Scanner {
                 } else
                 tokens.add(new Token(TipoToken.MAYOR, ">", "simbolos", linea++));
             }else
+            if (source.charAt(linea-1) == '"') {
+                String aux = "";
 
-            if (!Character.isLetter(source.charAt(linea-1))) {
+                while((linea-1 < source.length()) && Character.isDigit(source.charAt(linea-1))) {
+                    aux = aux.concat(String.valueOf(source.charAt(linea-1)));
+                     if (source.charAt(linea) == '"') { // Verifica si el siguiente carácter no es un número
+                        
+                        tokens.add(new Token(TipoToken.CADENA, aux, aux, linea++));
+                        break;
+                    }
 
-                tokens.add(new Token(TipoToken.IDENTIFICADOR, ">", "simbolos", linea++));
-            }else if (!Character.isDigit(source.charAt(linea-1))) {
-                tokens.add(new Token(TipoToken.NUEVE, ">", "simbolos", linea++));
+                 linea++;
+                }
+            }else
+            if(Character.isLetter(source.charAt(linea-1)) || Character.isDigit(source.charAt(linea-1))){    
+                String aux = "";
+                while((linea-1 < source.length()) && Character.isLetter(source.charAt(linea-1))) {
+                    aux = aux.concat(String.valueOf(source.charAt(linea-1)));
+                    if (linea == source.length()) { // Verifica si el número es el último carácter de la cadena de origen
+                        linea++;
+                        tokens.add(new Token(TipoToken.IDENTIFICADOR, aux, aux, linea++));
+                        break;
+                    } else
+                    if(linea  < source.length() && source.charAt(linea) == ' ') {
+                        linea++;
+                        tokens.add(new Token(TipoToken.IDENTIFICADOR, aux, aux, linea++));
+                        break;
+                    }
+               
+                 linea++;
+                }
+                while((linea-1 < source.length()) && Character.isDigit(source.charAt(linea-1))) {
+                    aux = aux.concat(String.valueOf(source.charAt(linea-1)));
+                    if (linea == source.length()) { // Verifica si el número es el último carácter de la cadena de origen
+                        linea++;
+                        tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea++));
+                        break;
+                    } else if (!Character.isDigit(source.charAt(linea))) { // Verifica si el siguiente carácter no es un número
+                        linea++;
+                        tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea++));
+                        break;
+                    }
+
+                 linea++;
+                }
             }
         }
         /* 

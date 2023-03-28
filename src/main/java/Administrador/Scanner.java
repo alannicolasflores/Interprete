@@ -249,7 +249,25 @@ public class Scanner {
                 tokens.add(new Token(TipoToken.POR, "*", null, linea));
                 cont++;
             } else
-            
+             /*if (source.charAt(cont-1) == '/') {
+                if(source.charAt(cont) == '/'){
+                    cont=cont+2;
+                    
+                    while((source.charAt(cont) == '/') && (source.charAt(cont+1) == 'n')){
+                            cont++;
+                    }
+                    cont=cont+4;
+                }else if(source.charAt(cont) == '*'){
+                    cont=cont+2;
+                    System.out.println(cont);
+                    while(!(source.charAt(cont) == '*') && !(source.charAt(cont+1) == '/')){
+                            cont++;
+                            System.out.println(cont);
+                    }      
+                }else 
+                
+                tokens.add(new Token(TipoToken.DIAG, "/", null, linea));
+            } else */
             if (source.charAt(cont-1) == '/') {
                 tokens.add(new Token(TipoToken.DIAG, "/", null, linea));
                 cont++;

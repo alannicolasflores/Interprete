@@ -321,7 +321,7 @@ public class Scanner {
               cont=cont+2;    
             }
             else 
-            if(Character.isLetter(source.charAt(cont-1)) || Character.isDigit(source.charAt(cont-1))){    
+            if(Character.isLetter(source.charAt(cont-1))){    
                 String aux = "";
 
 
@@ -444,33 +444,47 @@ public class Scanner {
                         tokens.add(new Token(TipoToken.IDENTIFICADOR, aux, null, linea));
                         cont++;
                         break;
+                    }else if (!Character.isLetter(source.charAt(cont))) { // Verifica si el siguiente carácter no es un número
+                            
+                    tokens.add(new Token(TipoToken.IDENTIFICADOR, aux, null, linea));
+                    cont++;
+                    break;
                     }
-               
                  cont++;
                 }
-                while((cont-1 < source.length()) && Character.isDigit(source.charAt(cont-1))) {
-                    aux = aux.concat(String.valueOf(source.charAt(cont-1)));
-                    if (cont == source.length()) { // Verifica si el número es el último carácter de la cadena de origen
-                        cont++;
-                        tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea));
-                        cont++;
-                        break;
-                    } else if (!Character.isDigit(source.charAt(cont))) { // Verifica si el siguiente carácter no es un número
-                        cont++;
-                        tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea));
-                        cont++;
-                        break;
+              
+                }else
+                if ( Character.isDigit(source.charAt(cont-1)) && cont-1 < source.length()) {
+                    String aux="";
+                    while((cont-1 < source.length()) && Character.isDigit(source.charAt(cont-1))) {
+                        aux = aux.concat(String.valueOf(source.charAt(cont-1)));
+                        if (cont == source.length()) { // Verifica si el número es el último carácter de la cadena de origen
+                           
+                            tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea));
+                            cont++;
+                            break;
+                        } else if (!Character.isDigit(source.charAt(cont))) { // Verifica si el siguiente carácter no es un número
+                            
+                            tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea));
+                            cont++;
+                            break;
+                        }
+    
+                     cont++;
+    
                     }
+    
+                }else
 
-                 cont++;
-
-                }
                 if(cont-1<source.length()){
-                if((source.charAt(cont-1) == '/') && (source.charAt(cont) == 'n')){
-                    linea++;
-                    cont=cont+2;
-                }}
-            }
+                    if((source.charAt(cont-1) == '/') && (source.charAt(cont) == 'n')){
+                        linea++;
+                        cont=cont+2;
+                }
+                }
+
+
+
         }
         /* 
         Analizar el texto de entrada para extraer todos los tokens

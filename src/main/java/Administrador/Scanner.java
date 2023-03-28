@@ -469,7 +469,7 @@ public class Scanner {
                  cont++;
 
                 }
-                if(cont>source.length()){
+                if(cont-1<source.length()){
                 if((source.charAt(cont-1) == '/') && (source.charAt(cont) == 'n')){
                     linea++;
                     cont=cont+2;

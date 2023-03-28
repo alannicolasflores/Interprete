@@ -88,10 +88,7 @@ public class Scanner {
          System.out.println("tamaño");
          System.out.println(i);
          while (cont-1<i){
-        if((source.charAt(cont-1) == '/') && (source.charAt(cont) == 'n')){
-            linea++;
-            cont=cont+2;
-        }else
+
         if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {
         cont++;
         }else
@@ -470,7 +467,13 @@ public class Scanner {
                     }
 
                  cont++;
+
                 }
+                if(cont>source.length()){
+                if((source.charAt(cont-1) == '/') && (source.charAt(cont) == 'n')){
+                    linea++;
+                    cont=cont+2;
+                }}
             }
         }
         /* 

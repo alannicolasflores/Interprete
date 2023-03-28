@@ -87,7 +87,7 @@ public class Scanner {
          int cont=1;
          System.out.println("tamaño");
          System.out.println(i);
-         while (cont-1<i){
+         while (cont-1<source.length()){
 
         if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {
         cont++;
@@ -200,16 +200,6 @@ public class Scanner {
         if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {
             cont++;
         }else
-        if (source.charAt(cont-1) == '!') {
-                if (source.charAt(cont-1) == '!' && source.charAt(cont)=='=') {
-                    tokens.add(new Token(TipoToken.COMP, "!=", null, linea));
-                    cont=cont+2;
-                }else
-                tokens.add(new Token(TipoToken.NEG, "!", null, linea));
-                cont++;
-            }        
-            else
- 
             if (source.charAt(cont-1) == '(') {
                 tokens.add(new Token(TipoToken.PAR1, "(",null, linea));    
                 cont++;
@@ -259,25 +249,14 @@ public class Scanner {
                 tokens.add(new Token(TipoToken.POR, "*", null, linea));
                 cont++;
             } else
+            
             if (source.charAt(cont-1) == '/') {
                 tokens.add(new Token(TipoToken.DIAG, "/", null, linea));
                 cont++;
             } else
-            // if (source.charAt(cont-1) == '/') {
-            //     if(source.charAt(cont) == '/'){
-            //         cont=cont+2;
-                    
-            //         while((source.charAt(cont) == '/') && (source.charAt(cont+1) == 'n')||(cont-1 < source.length())){
-            //                 cont=cont+2;
-            //                 linea++;       
-            //         }
-            //         cont=cont+4;
-            //     }else 
-            //     tokens.add(new Token(TipoToken.DIAG, "/", null, linea));
-            //     cont++;
-            // } else
- 
             if (source.charAt(cont-1) == '!') {
+                System.out.println("entro");
+              
                 if (source.charAt(cont-1) == '!' && source.charAt(cont)=='=') {
                     tokens.add(new Token(TipoToken.COMP, "!=", null, linea));
                     cont=cont+2;
@@ -285,7 +264,6 @@ public class Scanner {
                 tokens.add(new Token(TipoToken.NEG, "!", null, linea));
                 cont++;
             } else
- 
             if (source.charAt(cont-1) == '=') {
                 //tokens.add(new Token(TipoToken.IGUAL1, "=", "simbolos", linea++));
                 if (source.charAt(cont-1)== '=' && source.charAt(cont)=='=') {
@@ -321,8 +299,7 @@ public class Scanner {
                     aux = aux.concat(String.valueOf(source.charAt(cont-1))); 
                 }
                 tokens.add(new Token(TipoToken.CADENA, aux, aux, linea));
-                cont=cont+2;
-                
+              cont=cont+2;    
             }
             else 
             if(Character.isLetter(source.charAt(cont-1)) || Character.isDigit(source.charAt(cont-1))){    

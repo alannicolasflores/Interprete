@@ -273,28 +273,29 @@ public class Scanner {
                 cont++;
             } else
             if (source.charAt(cont-1) == '!') {
-                System.out.println("entro");
-              
-                if (source.charAt(cont-1) == '!' && source.charAt(cont)=='=') {
+                if (cont < source.length() && source.charAt(cont)=='=') {
                     tokens.add(new Token(TipoToken.COMP, "!=", null, linea));
                     cont=cont+2;
-                } else
-                tokens.add(new Token(TipoToken.NEG, "!", null, linea));
-                cont++;
+                } else {
+                    tokens.add(new Token(TipoToken.NEG, "!", null, linea));
+                    cont++;
+                }
+                
             } else
             if (source.charAt(cont-1) == '=') {
                 //tokens.add(new Token(TipoToken.IGUAL1, "=", "simbolos", linea++));
-                if (source.charAt(cont-1)== '=' && source.charAt(cont)=='=') {
+                
+                if (cont < source.length() && source.charAt(cont)=='=') {
                     tokens.add(new Token(TipoToken.IGUAL2, "==", null, linea));
                     cont=cont+2;
-                }
-                else
+                }else
+                {
                 tokens.add(new Token(TipoToken.IGUAL1, "=", null, linea));
-                cont++;
+                cont++;}
              } else
   
             if (source.charAt(cont-1) == '<') {
-                if (source.charAt(cont-1) == '<' && source.charAt(cont)=='=') {
+                if (cont < source.length() && source.charAt(cont)=='=') {
                     tokens.add(new Token(TipoToken.MENORI, "<=", null, linea));
                     cont=cont+2;
                 } else
@@ -303,7 +304,7 @@ public class Scanner {
             } else
  
             if (source.charAt(cont-1) == '>') {
-                if (source.charAt(cont-1) == '>' && source.charAt(cont)=='=') {
+                if (cont < source.length() && source.charAt(cont)=='=') {
                     tokens.add(new Token(TipoToken.MAYORI, ">=", null, linea));
                     cont=cont+2;
                 } else

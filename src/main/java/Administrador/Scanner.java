@@ -85,10 +85,9 @@ public class Scanner {
 
     List<Token> scanTokens(){
         //Aquí va el corazón del scanner.
-         int i=source.length();
+
          int cont=1;
-         System.out.println("tamaño");
-         System.out.println(i);
+
          while (cont-1<source.length()){
 
         if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {

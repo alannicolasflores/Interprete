@@ -240,7 +240,7 @@ public class Scanner {
                 if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {
                     cont++;
                 }else
-                if (cont-1 < source.length() &&source.charAt(cont-1)  == 'f' && source.charAt(cont) == 'a' && source.charAt(cont+1) == 'l' && source.charAt(cont+2) == 's' && source.charAt(cont+3) == 'e') {
+                if (source.length()!=2&&source.charAt(cont-1)  == 'f' && source.charAt(cont) == 'a' && source.charAt(cont+1) == 'l' && source.charAt(cont+2) == 's' && source.charAt(cont+3) == 'e') {
                     tokens.add(new Token(TipoToken.FALSE, "false", null, linea));
                     cont = cont + 5;
                 } else
@@ -356,7 +356,11 @@ public class Scanner {
                         tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea));
                         cont++;
                         break;
-                    } else if (!Character.isDigit(source.charAt(cont))) { // Verifica si el siguiente carácter no es un número
+                    } 
+                    else if((cont  < source.length() && source.charAt(cont) == '.')|| (cont  < source.length() && source.charAt(cont) == ',')){
+                        cont ++;
+                    }
+                    else if (!Character.isDigit(source.charAt(cont))) { // Verifica si el siguiente carácter no es un número
 
                         tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea));
                         cont++;

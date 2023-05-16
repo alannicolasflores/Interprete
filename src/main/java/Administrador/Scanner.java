@@ -13,19 +13,20 @@ import java.util.OptionalLong;
 
 public class Scanner {
 
-    private final String source;
+    private  String source;
 
     private final List<Token> tokens = new ArrayList<>();
-    
+
     private int linea = 1;
 
     private static final Map<String, TipoToken> palabrasReservadas;
+
     static {
         palabrasReservadas = new HashMap<>();
         palabrasReservadas.put("and", TipoToken.AND);//
         palabrasReservadas.put("class", TipoToken.CLASS);//
         palabrasReservadas.put("also", TipoToken.ALSO);//
-        palabrasReservadas.put("false", TipoToken.FALSE );//
+        palabrasReservadas.put("false", TipoToken.FALSE);//
         palabrasReservadas.put("to", TipoToken.TO);
         palabrasReservadas.put("fun", TipoToken.FUN); //definir funciones
         palabrasReservadas.put("if", TipoToken.IF);//
@@ -39,9 +40,10 @@ public class Scanner {
         palabrasReservadas.put("var", TipoToken.VAR); //definir variables
         palabrasReservadas.put("while", TipoToken.WHILE);//
     }
-    
+
     private static final Map<String, TipoToken> simbolos;
-    static{
+
+    static {
         simbolos = new HashMap<>();
         simbolos.put("(", TipoToken.PAR1);
         simbolos.put(")", TipoToken.PAR2);
@@ -62,39 +64,47 @@ public class Scanner {
         simbolos.put("<=", TipoToken.MENORI);
         simbolos.put(">", TipoToken.MAYOR);
         simbolos.put(">=", TipoToken.MAYORI);
-        
+
     }
 
     private static final Map<String, TipoToken> identificadores;
-    static{
+
+    static {
         identificadores = new HashMap<>();
         // private final String abc="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPKRSTUVWXYZ";
-        
+
         identificadores.put("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPKRSTUVWXYZ", TipoToken.IDENTIFICADOR);
         identificadores.put("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPKRSTUVWXYZ", TipoToken.CADENA);
         identificadores.put("0123456789", TipoToken.NUMERO);
-        
+
     }
 
 
-    Scanner(String source){
+    Scanner(String source) {
         this.source = source;
 
-        
+
     }
 
-    List<Token> scanTokens(){
+    List<Token> scanTokens() {
         //Aquí va el corazón del scanner.
+        source=source.replaceAll("\r\n", "");
 
-        int cont=1;
 
-        while (cont-1<source.length()){
-            if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {
+        int cont = 1;
+
+        while (cont - 1 < source.length()) {
+            if (cont - 1 < source.length() && source.charAt(cont - 1) == ' ') {
                 cont++;
+            } else if (cont - 1 < source.length() - 1 && source.charAt(cont - 1) == '/' && source.charAt(cont) == 't') {
+                cont += 2;
+            } else if ((cont - 1 < source.length() - 1 && source.charAt(cont - 1) == '/' && source.charAt(cont) == 'r')||(cont - 1 < source.length() - 1 && source.charAt(cont - 1) == '/' && source.charAt(cont) == 'n')) {
+                cont += 2;
+                linea++;
             }else
 
-            if (source.charAt(cont-1) == '(') {
-                tokens.add(new Token(TipoToken.PAR1, "(",null, linea));
+            if (source.charAt(cont - 1) == '(') {
+                tokens.add(new Token(TipoToken.PAR1, "(", null, linea));
                 cont++;
             }else
 
@@ -204,14 +214,20 @@ public class Scanner {
                     tokens.add(new Token(TipoToken.MAYOR, ">", null, linea));
                 cont++;
             }else
-            if (source.charAt(cont-1) == '"') {
+            if (source.charAt(cont - 1) == '"') {
                 String aux = "";
-                while (cont < source.length()&&source.charAt(cont) != '"') {
+                cont++;
+                while (cont - 1 < source.length() && source.charAt(cont - 1) != '"') {
+                    aux = aux.concat(String.valueOf(source.charAt(cont - 1)));
                     cont++;
-                    aux = aux.concat(String.valueOf(source.charAt(cont-1)));
                 }
-                tokens.add(new Token(TipoToken.CADENA, aux, aux, linea));
-                cont=cont+2;
+
+                if (cont - 1 >= source.length()) {
+                    System.out.print("Error: no se cerraron las comillas ");
+                } else {
+                    tokens.add(new Token(TipoToken.CADENA, aux, aux, linea));
+                    cont = cont + 2;
+                }
             }
             else
             if(Character.isLetter(source.charAt(cont-1))){
@@ -356,9 +372,10 @@ public class Scanner {
                         tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea));
                         cont++;
                         break;
-                    } 
-                    else if((cont  < source.length() && source.charAt(cont) == '.')|| (cont  < source.length() && source.charAt(cont) == ',')){
-                        cont ++;
+                    }
+                    else if((cont  < source.length() && source.charAt(cont) == '.')|| (cont  < source.length() && source.charAt(cont) == ',')) {
+                        cont++;
+                        aux = aux.concat(String.valueOf(source.charAt(cont - 1)));
                     }
                     else if (!Character.isDigit(source.charAt(cont))) { // Verifica si el siguiente carácter no es un número
 
@@ -371,33 +388,23 @@ public class Scanner {
 
                 }
 
-            }else
-
-            if(cont-1<source.length()){
-                if((source.charAt(cont-1) == '/') && (source.charAt(cont) == 'n')){
-                    linea++;
-                    cont=cont+2;
-                }
             }
 
 
 
         }
-        /*
-        Analizar el texto de entrada para extraer todos los tokens
-        y al final agregar el token de fin de archivo
-        */
-
+    /*
+    Analizar el texto de entrada para extraer todos los tokens
+    y al final agregar el token de fin de archivo
+    */
         tokens.add(new Token(TipoToken.EOF, "", null, linea));
         //literal es una expresion regular
         //lexema es el string al cual es igual
         //linea: es un contador de palabras
 
-
         return tokens;
     }
 }
-
 
 /*
 Signos o símbolos del lenguaje:

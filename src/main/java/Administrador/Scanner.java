@@ -73,9 +73,9 @@ public class Scanner {
         identificadores = new HashMap<>();
         // private final String abc="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPKRSTUVWXYZ";
 
-        identificadores.put("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPKRSTUVWXYZ", TipoToken.IDENTIFICADOR);
-        identificadores.put("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPKRSTUVWXYZ", TipoToken.CADENA);
-        identificadores.put("0123456789", TipoToken.NUMERO);
+        identificadores.put("", TipoToken.IDENTIFICADOR);
+        identificadores.put("", TipoToken.CADENA);
+        identificadores.put("", TipoToken.NUMERO);
 
     }
 

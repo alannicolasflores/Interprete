@@ -15,7 +15,7 @@ public enum TipoToken {
 
 
     // Palabras clave:
-    AND, CLASS, ALSO,FALSE,TO,FUN,IF,NULL,OR,PRINT,RETURN,SUPER,THIS,TRUE,VAR,WHILE,
+    AND, CLASS, ELSE,FALSE,FOR,FUN,IF,NULL,OR,PRINT,RETURN,SUPER,THIS,TRUE,VAR,WHILE,
     Y,
     
     //Símbolos

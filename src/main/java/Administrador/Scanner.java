@@ -25,9 +25,9 @@ public class Scanner {
         palabrasReservadas = new HashMap<>();
         palabrasReservadas.put("and", TipoToken.AND);//
         palabrasReservadas.put("class", TipoToken.CLASS);//
-        palabrasReservadas.put("also", TipoToken.ALSO);//
+        palabrasReservadas.put("else", TipoToken.ELSE);//
         palabrasReservadas.put("false", TipoToken.FALSE);//
-        palabrasReservadas.put("to", TipoToken.TO);
+        palabrasReservadas.put("to", TipoToken.FOR);
         palabrasReservadas.put("fun", TipoToken.FUN); //definir funciones
         palabrasReservadas.put("if", TipoToken.IF);//
         palabrasReservadas.put("null", TipoToken.NULL);//
@@ -241,16 +241,12 @@ public class Scanner {
                     cont = cont + 3;
 
                 }else
-                if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {
-                    cont++;
-                }else
+
                 if (source.length() - cont>2&&source.charAt(cont-1) == 'a' && source.charAt(cont) == 'l' && source.charAt(cont+1) == 's' && source.charAt(cont+2) == 'o') {
-                    tokens.add(new Token(TipoToken.ALSO, "also", null, linea));
+                    tokens.add(new Token(TipoToken.ELSE, "else", null, linea));
                     cont = cont + 4;
                 }else
-                if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {
-                    cont++;
-                }else
+
                 if (source.length() - cont>3&&source.charAt(cont-1) == 'c' && source.charAt(cont) == 'l' && source.charAt(cont+1) == 'a' && source.charAt(cont+2) == 's' && source.charAt(cont+3) == 's') {
                     tokens.add(new Token(TipoToken.CLASS, "class",null, linea));
                     cont=cont+5;
@@ -316,7 +312,7 @@ public class Scanner {
                     cont++;
                 }
                 else if (source.length() - cont>0&&source.charAt(cont-1) == 't' && source.charAt(cont) == 'o') {
-                    tokens.add(new Token(TipoToken.TO, "to", null, linea));
+                    tokens.add(new Token(TipoToken.FOR, "for", null, linea));
                     cont = cont + 2;
                 } else
                 if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {

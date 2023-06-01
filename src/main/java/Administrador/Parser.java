@@ -78,23 +78,25 @@ public class Parser {
     }
     void PROGRAM() {
         if(hayErrores) return;
-        DECLARATION();
+        if (preanalisis.equals(Class)||preanalisis.equals(fun)||preanalisis.equals(var)||preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)||preanalisis.equals(For)||preanalisis.equals(If)||preanalisis.equals(print)||preanalisis.equals(Return)||preanalisis.equals(While)||preanalisis.equals(llave1)){
+            DECLARATION();
+        }
     }
     void DECLARATION() {
         if(hayErrores) return;
         if (preanalisis.equals(Class)) {// se analiza el primero
             CLASS_DECL();
-            //DECLARATION();
+            DECLARATION();
         } else if (preanalisis.equals(fun)) {
             FUN_DECL();
-            //DECLARATION();
+            DECLARATION();
         } else if (preanalisis.equals(var)) {
             VAR_DECL();
             coincidir(pcoma);
-            //DECLARATION();
-        } else if (preanalisis.equals(var)) {
+            DECLARATION();
+        } else if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             STATEMENT();
-            //DECLARATION();
+            DECLARATION();
         }
     }
     void CLASS_DECL(){
@@ -108,7 +110,7 @@ public class Parser {
            coincidir(llave2);
         }else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada Class.");
         }
     }
     void CLASS_INHER(){
@@ -125,7 +127,7 @@ public class Parser {
             FUNCTION();
         }else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada fun.");
         }
     }
     void VAR_DECL(){
@@ -136,7 +138,7 @@ public class Parser {
             VAR_INIT();
         }else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada var.");
         }
     }
     void VAR_INIT(){
@@ -147,11 +149,22 @@ public class Parser {
     }
     void STATEMENT(){
         if(hayErrores) return;
-        if (preanalisis.equals(var)){
-            coincidir(var);
-            coincidir(identificador);
-            VAR_INIT();
-        }else{
+        if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
+            EXPRESSION();
+        }else if (preanalisis.equals(For)){
+            FOR_STMT();
+        }else if (preanalisis.equals(If)){
+            IF_STMT();
+        }else if (preanalisis.equals(print)){
+            PRINT_STMT();
+        }else if (preanalisis.equals(Return)){
+            RETURN_STMT();
+        }else if (preanalisis.equals(While)){
+            WHILE_STMT();
+        }else if (preanalisis.equals(llave1)){
+            BLOCK();
+        }
+        else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
@@ -179,10 +192,13 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
     }
-    void  FOR_STMT_1(){
+    void  FOR_STMT_1(){//
         if(hayErrores) return;
-        if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)||preanalisis.equals(pcoma)||preanalisis.equals(var)){
+        if(preanalisis.equals(var)){
             VAR_DECL();
+        }
+        else if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)||preanalisis.equals(pcoma)){
+            
             EXPR_STMT();
         }else{
             hayErrores = true;
@@ -245,7 +261,7 @@ public class Parser {
         if(hayErrores) return;
         if(preanalisis.equals(Return)){
             coincidir(Return);
-            RETURN_STMT();
+            RETURN_EXP_OPC();
             coincidir(pcoma);
         }
         else{
@@ -311,16 +327,15 @@ public class Parser {
     }
     void  ASSIGMENT_OPC(){
         if(hayErrores) return;
-        if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
-            EXPRESSION();
+        if (preanalisis.equals(igual1)){
+            coincidir(igual1);
         }
     }
 
     void  LOGIC_OR(){
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
-            LOGIC_OR();
-            ASSIGMENT_OPC();
+            LOGIC_AND(); LOGIC_OR_2();
         }else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");

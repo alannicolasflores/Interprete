@@ -198,7 +198,7 @@ public class Parser {
             VAR_DECL();
         }
         else if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)||preanalisis.equals(pcoma)){
-            
+
             EXPR_STMT();
         }else{
             hayErrores = true;
@@ -436,21 +436,150 @@ public class Parser {
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             UNARY();
-            FACTOR();
+            FACTOR_2();
         }else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
 
     }
-    void FUNCTIONS(){
+    void FACTOR_2(){
+        if(hayErrores) return;
+        if (preanalisis.equals(diag)){
+            coincidir(diag);
+            UNARY();
+            FACTOR_2();
+        }else if (preanalisis.equals(por)){
+            coincidir(por);
+            UNARY();
+            FACTOR_2();
+        }
 
     }
+    void UNARY(){
+        if(hayErrores) return;
+        if (preanalisis.equals(neg)){
+            coincidir(neg);
+            UNARY();
+        }else if (preanalisis.equals(menos)){
+            coincidir(menos);
+            UNARY();
+            FACTOR_2();
+        }else if (preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
+            coincidir(menos);
+            UNARY();
+            FACTOR_2();
+        }else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+        }
+
+    }
+    void CALL() {
+        if(hayErrores) return;
+        if (preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
+            PRIMARY();
+            CALL_2();
+        }else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+        }
+    }
+    void CALL_2() {
+        if(hayErrores) return;
+        if (preanalisis.equals(par1)){
+            coincidir(par1); ARGUMENTS_OPC(); coincidir(par2); CALL_2();
+        }else if (preanalisis.equals(punto)){
+            coincidir(punto); coincidir(identificador); CALL_2();
+        }
+    }
+    void CALL_OPC() {
+        if(hayErrores) return;
+        if (preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
+            CALL();
+        }
+    }
+    void PRIMARY() {
+        if(hayErrores) return;
+        if (preanalisis.equals(True)){
+            coincidir(True);
+        }else if (preanalisis.equals(False)){
+            coincidir(False);
+        }else if (preanalisis.equals(Null)){
+            coincidir(Null);
+        }else if (preanalisis.equals(This)){
+            coincidir(This);
+        }else if (preanalisis.equals(numero)){
+            coincidir(numero);
+        }else if (preanalisis.equals(cadena)){
+            coincidir(cadena);
+        }else if (preanalisis.equals(identificador)){
+            coincidir(identificador);
+        }else if (preanalisis.equals(par1)){
+            coincidir(par1);
+            EXPRESSION();
+            coincidir(par2);
+        }else if (preanalisis.equals(Super)){
+            coincidir(Super);
+        }else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+        }
+    }
+
     void FUNCTION(){
-
+        if(hayErrores) return;
+        if (preanalisis.equals(identificador)){
+            coincidir(identificador); coincidir(par1); PARAMETERS_OPC(); coincidir(par2); BLOCK();
+        }else if (preanalisis.equals(punto)){
+            coincidir(punto); coincidir(identificador); CALL_2();
+        }
     }
-
-
+    void FUNCTIONS(){
+        if(hayErrores) return;
+        if (preanalisis.equals(identificador)){
+            FUNCTION(); FUNCTIONS();
+        }
+    }
+    void PARAMETERS_OPC(){
+        if(hayErrores) return;
+        if (preanalisis.equals(identificador)){
+            PARAMETERS();
+        }
+    }
+    void PARAMETERS(){
+        if(hayErrores) return;
+        if (preanalisis.equals(identificador)){
+            coincidir(identificador); PARAMETERS_2();
+        }
+    }
+    void PARAMETERS_2(){
+        if(hayErrores) return;
+        if (preanalisis.equals(coma)){
+            coincidir(coma); coincidir(identificador); PARAMETERS_2();
+        }
+    }
+    void ARGUMENTS_OPC(){
+        if(hayErrores) return;
+        if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
+            ARGUMENTS();
+        }
+    }
+    void ARGUMENTS(){
+        if(hayErrores) return;
+        if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
+            EXPRESSION();ARGUMENTS_2();
+        }else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+        }
+    }
+    void ARGUMENTS_2(){
+        if(hayErrores) return;
+        if (preanalisis.equals(coma)){
+            coincidir(coma); EXPRESSION(); ARGUMENTS_2();
+        }
+    }
 
     void coincidir(Token t){
         if(hayErrores) return;

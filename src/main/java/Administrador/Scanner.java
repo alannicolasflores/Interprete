@@ -88,18 +88,20 @@ public class Scanner {
 
     List<Token> scanTokens() {
         //Aquí va el corazón del scanner.
-        source=source.replaceAll("\r\n", "");
+        //source=source.replaceAll("\r\n", "");
 
 
         int cont = 1;
 
         while (cont - 1 < source.length()) {
-            if (cont - 1 < source.length() && source.charAt(cont - 1) == ' ') {
+            char a = source.charAt(cont - 1);
+
+            if (/*cont - 1 < source.length() &&*/ source.charAt(cont - 1) == ' ') {
                 cont++;
-            } else if (cont - 1 < source.length() - 1 && source.charAt(cont - 1) == '/' && source.charAt(cont) == 't') {
-                cont += 2;
-            } else if ((cont - 1 < source.length() - 1 && source.charAt(cont - 1) == '/' && source.charAt(cont) == 'r')||(cont - 1 < source.length() - 1 && source.charAt(cont - 1) == '/' && source.charAt(cont) == 'n')) {
-                cont += 2;
+            } else if (/*cont - 1 < source.length() - 1 &&*/ source.charAt(cont - 1) == '\t') {
+                cont++;
+            } else if (/*(cont - 1 < source.length() - 1 && */ source.charAt(cont - 1) == '\r' && source.charAt(cont) == '\n' /*)||(cont - 1 < source.length() - 1 && source.charAt(cont - 1) == '/' && source.charAt(cont) == 'n')*/) {
+                cont+=2;
                 linea++;
             }else
 
@@ -389,7 +391,6 @@ public class Scanner {
                 }
 
             }
-
 
 
         }

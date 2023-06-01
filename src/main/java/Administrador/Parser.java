@@ -64,7 +64,7 @@ public class Parser {
         preanalisis = tokens.get(i);
         PROGRAM();
         if(!hayErrores && !preanalisis.equals(finCadena)){
-            System.out.println("Error en la posición " + preanalisis.posicion + ". No se esperaba el token " + preanalisis.tipo);
+            System.out.println("Error en la posición " + preanalisis.linea + ". No se esperaba el token " + preanalisis.tipo);
         }
         else if(!hayErrores && preanalisis.equals(finCadena)){
             System.out.println("Consulta válida");
@@ -76,16 +76,6 @@ public class Parser {
             System.out.println("Consulta válida");
         }*/
     }
-    void PROGRAM(){
-        if(hayErrores) return;
-        if(preanalisis.equals(class)||preanalisis.equals(fun)||preanalisis.equals(var)||preanalisis.equals(false)||preanalisis.equals(null)||preanalisis.equals(this)||preanalisis.equals(number)){
-            coincidir(identificador);
-        }
-        else{
-            hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba la palabra reservada SELECT.");
-        }
-    }
     void PROGRAM() {
         if(hayErrores) return;
         DECLARATION();
@@ -94,19 +84,22 @@ public class Parser {
         if(hayErrores) return;
         if (preanalisis.equals(Class)) {// se analiza el primero
             CLASS_DECL();
-            DECLARATION();
+            //DECLARATION();
         } else if (preanalisis.equals(fun)) {
             FUN_DECL();
-            DECLARATION();
+            //DECLARATION();
         } else if (preanalisis.equals(var)) {
             VAR_DECL();
             coincidir(pcoma);
-            DECLARATION();
-        } else if (){
+            //DECLARATION();
+        } else if (preanalisis.equals(var)) {
+            STATEMENT();
+            //DECLARATION();
+        } /*else if (){
             // Regla épsilon
-        }else{
+        }*/else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
     }
     void CLASS_DECL(){
@@ -120,7 +113,7 @@ public class Parser {
            coincidir(llave2);
         }else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
     }
     void CLASS_INHER(){
@@ -128,11 +121,11 @@ public class Parser {
         if (preanalisis.equals(fun)) {
             coincidir(menor);
             coincidir(identificador);
-        }else if {
+        }/*else if {
             // Regla épsilon
-        }else{
+        }*/else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
 
     }
@@ -143,7 +136,7 @@ public class Parser {
             FUNCTION();
         }else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
     }
     void VAR_DECL(){
@@ -154,19 +147,19 @@ public class Parser {
             VAR_INIT();
         }else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
     }
     void VAR_INIT(){
         if(hayErrores) return;
         if (preanalisis.equals(igual1)){
             coincidir(igual1);
-            EXPRESSION();
-        }else if {
+            //EXPRESSION();
+        }/*else if {
             // Regla épsilon
-        }else{
+        }*/else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
     }
     void FUNCTIONS(){
@@ -176,10 +169,32 @@ public class Parser {
 
     }
     void STATEMENT(){
-
+        if(hayErrores) return;
+        /*if (preanalisis.equals()) {// se analiza el primero
+            CLASS_DECL();
+            DECLARATION();
+        } else if (preanalisis.equals(fun)) {
+            FUN_DECL();
+            DECLARATION();
+        } else if (preanalisis.equals(var)) {
+            VAR_DECL();
+            coincidir(pcoma);
+            DECLARATION();
+        }*/
     }
     void EXPR_STMT(){
-
+        if(hayErrores) return;
+        if (preanalisis.equals(true)) {// se analiza el primero
+            CLASS_DECL();
+            DECLARATION();
+        } else if (preanalisis.equals(fun)) {
+            FUN_DECL();
+            DECLARATION();
+        } else if (preanalisis.equals(var)) {
+            VAR_DECL();
+            coincidir(pcoma);
+            DECLARATION();
+        }
     }
     void  FOR_STMT(){
 
@@ -209,7 +224,7 @@ public class Parser {
         }
         else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un  " + t.tipo);
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba un  " + t.tipo);
 
         }
     }

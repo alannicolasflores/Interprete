@@ -342,7 +342,7 @@ public class Scanner {
                     cont = cont + 5;
                 } else
 
-                    while((cont-1 < source.length()) && Character.isLetter(source.charAt(cont-1))) {
+                    while((cont-1 < source.length()) && (Character.isLetter(source.charAt(cont-1)) || Character.isDigit(source.charAt(cont-1)))) {
                         aux = aux.concat(String.valueOf(source.charAt(cont-1)));
                         if (cont == source.length()) { // Verifica si el número es el último carácter de la cadena de origen
                             cont++;
@@ -355,12 +355,14 @@ public class Scanner {
                             tokens.add(new Token(TipoToken.IDENTIFICADOR, aux, null, linea));
                             cont++;
                             break;
-                        }else if (!Character.isLetter(source.charAt(cont))) { // Verifica si el siguiente carácter no es un número
+                        }else if (!Character.isDigit(source.charAt(cont))) { // Verifica si el siguiente carácter no es un número
 
                             tokens.add(new Token(TipoToken.IDENTIFICADOR, aux, null, linea));
                             cont++;
                             break;
-                        }
+                        } 
+                            
+                        
                         cont++;
                     }
 

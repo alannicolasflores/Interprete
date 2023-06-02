@@ -5,50 +5,50 @@ import java.util.List;
 public class Parser {
 
     private final List<Token> tokens;
-    private Token and = new Token(TipoToken.AND, "and", null, 0);
-    private Token Class = new Token(TipoToken.CLASS, "class", null, 0);
-    private Token Else = new Token(TipoToken.ELSE, "also", null, 0);
-    private Token False = new Token(TipoToken.FALSE, "false", null, 0);
-    private Token For = new Token(TipoToken.FOR, "to", null, 0);
-    private Token fun = new Token(TipoToken.FUN, "fun", null, 0);
-    private Token If = new Token(TipoToken.IF, "if", null, 0);
-    private Token Null = new Token(TipoToken.NULL, "null", null, 0);
-    private Token or = new Token(TipoToken.OR, "or", null, 0);
-    private Token print = new Token(TipoToken.PRINT, "print", null, 0);
-    private Token Return = new Token(TipoToken.RETURN, "return", null, 0);
-    private Token Super = new Token(TipoToken.SUPER, "super", null, 0);
-    private Token This = new Token(TipoToken.THIS, "this", null, 0);
-    private Token True = new Token(TipoToken.TRUE, "true", null, 0);
-    private Token var = new Token(TipoToken.VAR, "var", null, 0);
-    private Token While = new Token(TipoToken.WHILE, "while", null, 0);
+    private Token and = new Token(TipoToken.AND, "and"  );
+    private Token Class = new Token(TipoToken.CLASS, "class"  );
+    private Token Else = new Token(TipoToken.ELSE, "also"  );
+    private Token False = new Token(TipoToken.FALSE, "false"  );
+    private Token For = new Token(TipoToken.FOR, "to"  );
+    private Token fun = new Token(TipoToken.FUN, "fun"  );
+    private Token If = new Token(TipoToken.IF, "if");
+    private Token Null = new Token(TipoToken.NULL, "null"  );
+    private Token or = new Token(TipoToken.OR, "or"  );
+    private Token print = new Token(TipoToken.PRINT, "print"  );
+    private Token Return = new Token(TipoToken.RETURN, "return"  );
+    private Token Super = new Token(TipoToken.SUPER, "super"  );
+    private Token This = new Token(TipoToken.THIS, "this"  );
+    private Token True = new Token(TipoToken.TRUE, "true"  );
+    private Token var = new Token(TipoToken.VAR, "var"  );
+    private Token While = new Token(TipoToken.WHILE, "while"  );
 
 
     // Símbolos
-    private Token par1 = new Token(TipoToken.PAR1, "(", null, 0);
-    private Token par2 = new Token(TipoToken.PAR2, ")", null, 0);
-    private Token llave1 = new Token(TipoToken.LLAVE1, "{", null, 0);
-    private Token llave2 = new Token(TipoToken.LLAVE2, "}", null, 0);
-    private Token coma = new Token(TipoToken.COMA, ",", null, 0);
-    private Token punto = new Token(TipoToken.PUNTO, ".", null, 0);
-    private Token pcoma = new Token(TipoToken.PCOMA, ";", null, 0);
-    private Token menos = new Token(TipoToken.MENOS, "-", null, 0);
-    private Token mas = new Token(TipoToken.MAS, "+", null, 0);
-    private Token por = new Token(TipoToken.POR, "*", null, 0);
-    private Token diag = new Token(TipoToken.DIAG, "/", null, 0);
-    private Token neg = new Token(TipoToken.NEG, "!", null, 0);
-    private Token comp = new Token(TipoToken.COMP, "!=", null, 0);
-    private Token igual1 = new Token(TipoToken.IGUAL1, "=", null, 0);
-    private Token igual2 = new Token(TipoToken.IGUAL2, "==", null, 0);
-    private Token menor = new Token(TipoToken.MENOR, "<", null, 0);
-    private Token menori = new Token(TipoToken.MENORI, "<=", null, 0);
-    private Token mayor = new Token(TipoToken.MAYOR, ">", null, 0);
-    private Token mayori = new Token(TipoToken.MAYORI, ">=", null, 0);
+    private Token par1 = new Token(TipoToken.PAR1, "("  );
+    private Token par2 = new Token(TipoToken.PAR2, ")"  );
+    private Token llave1 = new Token(TipoToken.LLAVE1, "{"  );
+    private Token llave2 = new Token(TipoToken.LLAVE2, "}"  );
+    private Token coma = new Token(TipoToken.COMA, ","  );
+    private Token punto = new Token(TipoToken.PUNTO, "."  );
+    private Token pcoma = new Token(TipoToken.PCOMA, ";"  );
+    private Token menos = new Token(TipoToken.MENOS, "-"  );
+    private Token mas = new Token(TipoToken.MAS, "+"  );
+    private Token por = new Token(TipoToken.POR, "*"  );
+    private Token diag = new Token(TipoToken.DIAG, "/"  );
+    private Token neg = new Token(TipoToken.NEG, "!"  );
+    private Token comp = new Token(TipoToken.COMP, "!="  );
+    private Token igual1 = new Token(TipoToken.IGUAL1, "="  );
+    private Token igual2 = new Token(TipoToken.IGUAL2, "=="  );
+    private Token menor = new Token(TipoToken.MENOR, "<"  );
+    private Token menori = new Token(TipoToken.MENORI, "<="  );
+    private Token mayor = new Token(TipoToken.MAYOR, ">"  );
+    private Token mayori = new Token(TipoToken.MAYORI, ">="  );
 
     // Números
-    private Token numero = new Token(TipoToken.NUMERO, "", null, 0);
-    private Token cadena = new Token(TipoToken.CADENA, "", null, 0);
-    private Token identificador = new Token(TipoToken.IDENTIFICADOR, "", null, 0);
-    private final Token finCadena = new Token(TipoToken.EOF, "", null, 0);
+    private Token numero = new Token(TipoToken.NUMERO, ""  );
+    private Token cadena = new Token(TipoToken.CADENA, ""  );
+    private Token identificador = new Token(TipoToken.IDENTIFICADOR, ""  );
+    private final Token finCadena = new Token(TipoToken.EOF, ""  );
 
     private int i = 0;
     private boolean hayErrores = false;
@@ -64,7 +64,7 @@ public class Parser {
         preanalisis = tokens.get(i);
         PROGRAM();
         if(!hayErrores && !preanalisis.equals(finCadena)){
-            System.out.println("Error en la posición " + preanalisis.linea + ". No se esperaba el token " + preanalisis.tipo);
+            System.out.println("Error en la linea" + preanalisis.linea + ". No se esperaba el token " + preanalisis.tipo);
         }
         else if(!hayErrores && preanalisis.equals(finCadena)){
             System.out.println("Consulta válida");
@@ -78,11 +78,9 @@ public class Parser {
     }
     void PROGRAM() {
         if(hayErrores) return;
-        if (preanalisis.equals(Class)||preanalisis.equals(fun)||preanalisis.equals(var)||preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)||preanalisis.equals(For)||preanalisis.equals(If)||preanalisis.equals(print)||preanalisis.equals(Return)||preanalisis.equals(While)||preanalisis.equals(llave1)){
             DECLARATION();
-        }
     }
-    void DECLARATION() {
+    void DECLARATION() { //rev
         if(hayErrores) return;
         if (preanalisis.equals(Class)) {// se analiza el primero
             CLASS_DECL();
@@ -94,7 +92,7 @@ public class Parser {
             VAR_DECL();
             coincidir(pcoma);
             DECLARATION();
-        } else if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
+        } else if (preanalisis.equals(llave1)||preanalisis.equals(While)||preanalisis.equals(Return)||preanalisis.equals(print)||preanalisis.equals(If)||preanalisis.equals(For)||preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             STATEMENT();
             DECLARATION();
         }
@@ -136,18 +134,20 @@ public class Parser {
             coincidir(var);
             coincidir(identificador);
             VAR_INIT();
+            coincidir(pcoma);
         }else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada var.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada var identificador o ;");
         }
     }
-    void VAR_INIT(){
+    void VAR_INIT(){//rev
         if(hayErrores) return;
-        if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
+        if(preanalisis.equals(igual1)){
+            coincidir(igual1);
             EXPRESSION();
         }
     }
-    void STATEMENT(){
+    void STATEMENT(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             EXPRESSION();
@@ -157,10 +157,10 @@ public class Parser {
             IF_STMT();
         }else if (preanalisis.equals(print)){
             PRINT_STMT();
-        }else if (preanalisis.equals(Return)){
-            RETURN_STMT();
         }else if (preanalisis.equals(While)){
             WHILE_STMT();
+        }else if (preanalisis.equals(Return)){
+            RETURN_STMT();
         }else if (preanalisis.equals(llave1)){
             BLOCK();
         }
@@ -169,17 +169,18 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( for if print return while ).");
         }
     }
-    void EXPR_STMT(){ //
+    void EXPR_STMT(){ //rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             EXPRESSION();
+            coincidir(pcoma);
         }else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
 
-    void  FOR_STMT(){
+    void  FOR_STMT(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(For)){
             coincidir(For);
@@ -192,22 +193,24 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada for.");
         }
     }
-    void  FOR_STMT_1(){//
+    void  FOR_STMT_1(){//rev
         if(hayErrores) return;
         if(preanalisis.equals(var)){
             VAR_DECL();
         }
-        else if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)||preanalisis.equals(pcoma)){
-
+        else if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             EXPR_STMT();
-        }else{
+        }else if(preanalisis.equals(pcoma)){
+            coincidir(pcoma);
+        }
+            else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada var ! - true false null this numero cadena identificador super ( ;.");
         }
     }
-    void  FOR_STMT_2(){
+    void  FOR_STMT_2(){//rev
         if(hayErrores) return;
-        if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
+        if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)||preanalisis.equals(pcoma)){
             EXPRESSION();
         }else if(preanalisis.equals(pcoma)){
             coincidir(pcoma);
@@ -218,13 +221,13 @@ public class Parser {
         }
 
     }
-    void  FOR_STMT_3(){
+    void  FOR_STMT_3(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             EXPRESSION();
         }
     }
-    void  IF_STMT (){
+    void  IF_STMT (){//rev
         if(hayErrores) return;
         if(preanalisis.equals(If)){
             coincidir(If);
@@ -238,7 +241,7 @@ public class Parser {
         }
 
     }
-    void  ELSE_STATEMENT (){
+    void  ELSE_STATEMENT (){//rev
         if(hayErrores) return;
         if(preanalisis.equals(Else)){
             coincidir(Else);
@@ -246,18 +249,19 @@ public class Parser {
         }
 
     }
-    void PRINT_STMT(){
+    void PRINT_STMT(){//rev
         if(hayErrores) return;
         if(preanalisis.equals(print)){
             coincidir(print);
             EXPRESSION();
+            coincidir(pcoma);
         }
         else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada print.");
         }
     }
-    void RETURN_STMT(){
+    void RETURN_STMT(){//rev
         if(hayErrores) return;
         if(preanalisis.equals(Return)){
             coincidir(Return);
@@ -269,13 +273,13 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada return.");
         }
     }
-    void RETURN_EXP_OPC(){
+    void RETURN_EXP_OPC(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             EXPRESSION();
         }
     }
-    void WHILE_STMT(){
+    void WHILE_STMT(){//rev
         if(hayErrores) return;
         if(preanalisis.equals(While)){
             coincidir(While);
@@ -287,7 +291,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada While.");
         }
     }
-    void BLOCK(){
+    void BLOCK(){//rev
         if(hayErrores) return;
         if(preanalisis.equals(llave1)){
             coincidir(llave1);
@@ -299,13 +303,13 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ( ).");
         }
     }
-    void BLOCK_DECL(){
+    void BLOCK_DECL(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)||preanalisis.equals(For)||preanalisis.equals(If)||preanalisis.equals(print)||preanalisis.equals(Return)||preanalisis.equals(While)||preanalisis.equals(llave1)||preanalisis.equals(Class)||preanalisis.equals(fun)||preanalisis.equals(var)){
             DECLARATION(); BLOCK_DECL();
         }
     }
-    void EXPRESSION(){
+    void EXPRESSION(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
          ASSIGNMENT();
@@ -314,7 +318,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
-    void ASSIGNMENT(){
+    void ASSIGNMENT(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             LOGIC_OR();
@@ -325,14 +329,15 @@ public class Parser {
         }
 
     }
-    void  ASSIGMENT_OPC(){
+    void  ASSIGMENT_OPC(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(igual1)){
             coincidir(igual1);
+            EXPRESSION();
         }
     }
 
-    void  LOGIC_OR(){
+    void  LOGIC_OR(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             LOGIC_AND(); LOGIC_OR_2();
@@ -341,7 +346,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
-    void  LOGIC_OR_2(){
+    void  LOGIC_OR_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(or)){
             coincidir(or);
@@ -349,7 +354,7 @@ public class Parser {
             LOGIC_OR_2();
         }
     }
-    void  LOGIC_AND(){
+    void  LOGIC_AND(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             EQUALITY();
@@ -359,7 +364,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
-    void LOGIC_AND_2(){
+    void LOGIC_AND_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(and)){
             coincidir(and);
@@ -367,7 +372,7 @@ public class Parser {
             LOGIC_AND_2();
         }
     }
-    void EQUALITY(){
+    void EQUALITY(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             COMPARISON();
@@ -377,7 +382,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
-    void EQUALITY_2(){
+    void EQUALITY_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(comp)){
             coincidir(comp);
@@ -387,7 +392,7 @@ public class Parser {
             COMPARISON(); EQUALITY_2();
         }
     }
-    void COMPARISON(){
+    void COMPARISON(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             TERM();
@@ -397,7 +402,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
-    void COMPARISON_2(){
+    void COMPARISON_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(mayor)){
             coincidir(mayor);
@@ -413,7 +418,7 @@ public class Parser {
             TERM(); COMPARISON_2();
         }
     }
-    void TERM(){
+    void TERM(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             FACTOR(); TERM_2();
@@ -422,7 +427,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
-    void TERM_2(){
+    void TERM_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(menos)){
             coincidir(menos);
@@ -432,7 +437,7 @@ public class Parser {
             FACTOR(); TERM_2();
         }
     }
-    void FACTOR(){
+    void FACTOR(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             UNARY();
@@ -443,7 +448,7 @@ public class Parser {
         }
 
     }
-    void FACTOR_2(){
+    void FACTOR_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(diag)){
             coincidir(diag);
@@ -456,7 +461,7 @@ public class Parser {
         }
 
     }
-    void UNARY(){
+    void UNARY(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)){
             coincidir(neg);
@@ -464,18 +469,15 @@ public class Parser {
         }else if (preanalisis.equals(menos)){
             coincidir(menos);
             UNARY();
-            FACTOR_2();
         }else if (preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
-            coincidir(menos);
-            UNARY();
-            FACTOR_2();
+            CALL();
         }else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
 
     }
-    void CALL() {
+    void CALL() {//rev
         if(hayErrores) return;
         if (preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             PRIMARY();
@@ -485,7 +487,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada true false null this numero cadena identificador super ( .");
         }
     }
-    void CALL_2() {
+    void CALL_2() {//rev
         if(hayErrores) return;
         if (preanalisis.equals(par1)){
             coincidir(par1); ARGUMENTS_OPC(); coincidir(par2); CALL_2();
@@ -493,13 +495,13 @@ public class Parser {
             coincidir(punto); coincidir(identificador); CALL_2();
         }
     }
-    void CALL_OPC() {
+    void CALL_OPC() {//rev
         if(hayErrores) return;
         if (preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
-            CALL();
+            CALL(); coincidir(punto);
         }
     }
-    void PRIMARY() {
+    void PRIMARY() {//rev
         if(hayErrores) return;
         if (preanalisis.equals(True)){
             coincidir(True);
@@ -520,52 +522,53 @@ public class Parser {
             EXPRESSION();
             coincidir(par2);
         }else if (preanalisis.equals(Super)){
-            coincidir(Super);
+            coincidir(Super); coincidir(punto); coincidir(identificador);
         }else{
             hayErrores = true;
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada true false null this numero cadena identificador super ( .");
         }
     }
 
-    void FUNCTION(){
+    void FUNCTION(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(identificador)){
             coincidir(identificador); coincidir(par1); PARAMETERS_OPC(); coincidir(par2); BLOCK();
-        }else if (preanalisis.equals(punto)){
-            coincidir(punto); coincidir(identificador); CALL_2();
+        }else{
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada identificador");
         }
     }
-    void FUNCTIONS(){
+    void FUNCTIONS(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(identificador)){
             FUNCTION(); FUNCTIONS();
         }
     }
-    void PARAMETERS_OPC(){
+    void PARAMETERS_OPC(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(identificador)){
             PARAMETERS();
         }
     }
-    void PARAMETERS(){
+    void PARAMETERS(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(identificador)){
             coincidir(identificador); PARAMETERS_2();
         }
     }
-    void PARAMETERS_2(){
+    void PARAMETERS_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(coma)){
             coincidir(coma); coincidir(identificador); PARAMETERS_2();
         }
     }
-    void ARGUMENTS_OPC(){
+    void ARGUMENTS_OPC(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             ARGUMENTS();
         }
     }
-    void ARGUMENTS(){
+    void ARGUMENTS(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             EXPRESSION();ARGUMENTS_2();
@@ -574,7 +577,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
-    void ARGUMENTS_2(){
+    void ARGUMENTS_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(coma)){
             coincidir(coma); EXPRESSION(); ARGUMENTS_2();

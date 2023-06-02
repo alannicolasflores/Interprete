@@ -27,7 +27,7 @@ public class Scanner {
         palabrasReservadas.put("class", TipoToken.CLASS);//
         palabrasReservadas.put("else", TipoToken.ELSE);//
         palabrasReservadas.put("false", TipoToken.FALSE);//
-        palabrasReservadas.put("to", TipoToken.FOR);
+        palabrasReservadas.put("for", TipoToken.FOR);
         palabrasReservadas.put("fun", TipoToken.FUN); //definir funciones
         palabrasReservadas.put("if", TipoToken.IF);//
         palabrasReservadas.put("null", TipoToken.NULL);//
@@ -311,9 +311,9 @@ public class Scanner {
                 if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {
                     cont++;
                 }
-                else if (source.length() - cont>0&&source.charAt(cont-1) == 't' && source.charAt(cont) == 'o') {
+                else if (source.length() - cont>0&&source.charAt(cont-1) == 'f' && source.charAt(cont) == 'o'&& source.charAt(cont+1) == 'r') {
                     tokens.add(new Token(TipoToken.FOR, "for", null, linea));
-                    cont = cont + 2;
+                    cont = cont + 3;
                 } else
                 if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {
                     cont++;

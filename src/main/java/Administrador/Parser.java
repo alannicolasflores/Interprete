@@ -9,7 +9,7 @@ public class Parser {
     private Token Class = new Token(TipoToken.CLASS, "class"  );
     private Token Else = new Token(TipoToken.ELSE, "also"  );
     private Token False = new Token(TipoToken.FALSE, "false"  );
-    private Token For = new Token(TipoToken.FOR, "to"  );
+    private Token For = new Token(TipoToken.FOR, "for"  );
     private Token fun = new Token(TipoToken.FUN, "fun"  );
     private Token If = new Token(TipoToken.IF, "if");
     private Token Null = new Token(TipoToken.NULL, "null"  );

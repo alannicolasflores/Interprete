@@ -242,7 +242,7 @@ public class Scanner {
 
                 }else
 
-                if (source.length() - cont>2&&source.charAt(cont-1) == 'a' && source.charAt(cont) == 'l' && source.charAt(cont+1) == 's' && source.charAt(cont+2) == 'o') {
+                if (source.length() - cont>2&&source.charAt(cont-1) == 'e' && source.charAt(cont) == 'l' && source.charAt(cont+1) == 's' && source.charAt(cont+2) == 'e') {
                     tokens.add(new Token(TipoToken.ELSE, "else", null, linea));
                     cont = cont + 4;
                 }else
@@ -320,6 +320,10 @@ public class Scanner {
                 }
                 else if (source.length() - cont>2&&source.charAt(cont-1) == 't' && source.charAt(cont) == 'r' && source.charAt(cont+1) == 'u' && source.charAt(cont+2) == 'e') {
                     tokens.add(new Token(TipoToken.TRUE, "true", null, linea));
+                    cont = cont + 4;
+                } else
+                    if (source.length() - cont>2&&source.charAt(cont-1) == 't' && source.charAt(cont) == 'h' && source.charAt(cont+1) == 'i' && source.charAt(cont+2) == 's') {
+                    tokens.add(new Token(TipoToken.THIS, "this", null, linea));
                     cont = cont + 4;
                 } else
                 if (cont-1 < source.length() && source.charAt(cont-1) == ' ') {

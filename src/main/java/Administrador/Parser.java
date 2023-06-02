@@ -90,7 +90,6 @@ public class Parser {
             DECLARATION();
         } else if (preanalisis.equals(var)) {
             VAR_DECL();
-            coincidir(pcoma);
             DECLARATION();
         } else if (preanalisis.equals(llave1)||preanalisis.equals(While)||preanalisis.equals(Return)||preanalisis.equals(print)||preanalisis.equals(If)||preanalisis.equals(For)||preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             STATEMENT();

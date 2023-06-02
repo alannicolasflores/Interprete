@@ -7,3 +7,7 @@
 *.zip
 *.tar.gz
 *.rar
+Interprete.iml
+.idea
+out
+out/production/Interprete/Administrador/Parser.class

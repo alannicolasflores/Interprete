@@ -449,7 +449,7 @@ public class Parser {
         }
 
     }
-    void FACTOR_2(){
+    void FACTOR_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(diag)){
             coincidir(diag);
@@ -462,7 +462,7 @@ public class Parser {
         }
 
     }
-    void UNARY(){
+    void UNARY(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)){
             coincidir(neg);
@@ -472,12 +472,10 @@ public class Parser {
             UNARY();
             FACTOR_2();
         }else if (preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
-            coincidir(menos);
-            UNARY();
-            FACTOR_2();
+            CALL();
         }else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
 
     }
@@ -488,10 +486,10 @@ public class Parser {
             CALL_2();
         }else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada  true false null this numero cadena identificador super ( .");
         }
     }
-    void CALL_2() {
+    void CALL_2() {//rev
         if(hayErrores) return;
         if (preanalisis.equals(par1)){
             coincidir(par1); ARGUMENTS_OPC(); coincidir(par2); CALL_2();
@@ -499,13 +497,13 @@ public class Parser {
             coincidir(punto); coincidir(identificador); CALL_2();
         }
     }
-    void CALL_OPC() {
+    void CALL_OPC() {//rev
         if(hayErrores) return;
         if (preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
-            CALL();
+            CALL(); coincidir(punto);
         }
     }
-    void PRIMARY() {
+    void PRIMARY() {//rev
         if(hayErrores) return;
         if (preanalisis.equals(True)){
             coincidir(True);
@@ -526,52 +524,53 @@ public class Parser {
             EXPRESSION();
             coincidir(par2);
         }else if (preanalisis.equals(Super)){
-            coincidir(Super);
+            coincidir(Super); coincidir(punto); coincidir(identificador);
         }else{
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada  true false null this numero cadena identificador super ( .");
         }
     }
 
-    void FUNCTION(){
+    void FUNCTION(){ //rev
         if(hayErrores) return;
         if (preanalisis.equals(identificador)){
             coincidir(identificador); coincidir(par1); PARAMETERS_OPC(); coincidir(par2); BLOCK();
-        }else if (preanalisis.equals(punto)){
-            coincidir(punto); coincidir(identificador); CALL_2();
+        }else {
+            hayErrores = true;
+            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada  true false null this numero cadena identificador super ( .");
         }
     }
-    void FUNCTIONS(){
+    void FUNCTIONS(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(identificador)){
             FUNCTION(); FUNCTIONS();
         }
     }
-    void PARAMETERS_OPC(){
+    void PARAMETERS_OPC(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(identificador)){
             PARAMETERS();
         }
     }
-    void PARAMETERS(){
+    void PARAMETERS(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(identificador)){
             coincidir(identificador); PARAMETERS_2();
         }
     }
-    void PARAMETERS_2(){
+    void PARAMETERS_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(coma)){
             coincidir(coma); coincidir(identificador); PARAMETERS_2();
         }
     }
-    void ARGUMENTS_OPC(){
+    void ARGUMENTS_OPC(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             ARGUMENTS();
         }
     }
-    void ARGUMENTS(){
+    void ARGUMENTS(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(neg)||preanalisis.equals(menos)||preanalisis.equals(True)||preanalisis.equals(False)||preanalisis.equals(Null)||preanalisis.equals(This)||preanalisis.equals(numero)||preanalisis.equals(cadena)||preanalisis.equals(identificador)||preanalisis.equals(Super)||preanalisis.equals(par1)){
             EXPRESSION();ARGUMENTS_2();
@@ -580,7 +579,7 @@ public class Parser {
             System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
     }
-    void ARGUMENTS_2(){
+    void ARGUMENTS_2(){//rev
         if(hayErrores) return;
         if (preanalisis.equals(coma)){
             coincidir(coma); EXPRESSION(); ARGUMENTS_2();

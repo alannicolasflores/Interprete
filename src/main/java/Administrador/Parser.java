@@ -128,7 +128,7 @@ public class Parser {
     void CLASS_INHER() {
         if (hayErrores)
             return;
-        if (preanalisis.equals(mayor)) {
+        if (preanalisis.equals(menor)) {
             coincidir(menor);
             coincidir(identificador);
         }

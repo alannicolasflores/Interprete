@@ -121,7 +121,7 @@ public class Parser {
         } else {
             hayErrores = true;
             System.out
-                    .println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada Class.");
+                    .println("Error en la línea " + preanalisis.linea + ". Se esperaba la palabra reservada Class.");
         }
     }
 
@@ -142,7 +142,7 @@ public class Parser {
             FUNCTION();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada fun.");
+            System.out.println("Error en la línea " + preanalisis.linea + ". Se esperaba la palabra reservada fun.");
         }
     }
 
@@ -156,7 +156,7 @@ public class Parser {
             coincidir(pcoma);
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada var identificador o ;");
         }
     }
@@ -192,7 +192,7 @@ public class Parser {
             BLOCK();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( for if print return while ).");
         }
     }
@@ -208,7 +208,7 @@ public class Parser {
             coincidir(pcoma);
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
@@ -226,7 +226,7 @@ public class Parser {
             STATEMENT();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada for.");
+            System.out.println("Error en la línea " + preanalisis.linea + ". Se esperaba la palabra reservada for.");
         }
     }
 
@@ -245,7 +245,7 @@ public class Parser {
             coincidir(pcoma);
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada var ! - true false null this numero cadena identificador super ( ;.");
         }
     }
@@ -262,7 +262,7 @@ public class Parser {
             coincidir(pcoma);
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( ; .");
         }
 
@@ -291,7 +291,7 @@ public class Parser {
             ELSE_STATEMENT();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada if.");
+            System.out.println("Error en la línea " + preanalisis.linea + ". Se esperaba la palabra reservada if.");
         }
 
     }
@@ -316,7 +316,7 @@ public class Parser {
         } else {
             hayErrores = true;
             System.out
-                    .println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada print.");
+                    .println("Error en la línea " + preanalisis.linea + ". Se esperaba la palabra reservada print.");
         }
     }
 
@@ -330,7 +330,7 @@ public class Parser {
         } else {
             hayErrores = true;
             System.out.println(
-                    "Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada return.");
+                    "Error en la línea " + preanalisis.linea + ". Se esperaba la palabra reservada return.");
         }
     }
 
@@ -357,7 +357,7 @@ public class Parser {
         } else {
             hayErrores = true;
             System.out
-                    .println("Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada While.");
+                    .println("Error en la línea " + preanalisis.linea + ". Se esperaba la palabra reservada While.");
         }
     }
 
@@ -371,7 +371,7 @@ public class Parser {
         } else {
             hayErrores = true;
             System.out.println(
-                    "Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada LLAVE1.");
+                    "Error en la línea " + preanalisis.linea + ". Se esperaba la palabra reservada LLAVE1.");
         }
     }
 
@@ -400,7 +400,7 @@ public class Parser {
             ASSIGNMENT();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
@@ -416,7 +416,7 @@ public class Parser {
             ASSIGMENT_OPC();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
 
@@ -442,7 +442,7 @@ public class Parser {
             LOGIC_OR_2();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
@@ -468,7 +468,7 @@ public class Parser {
             LOGIC_AND_2();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
@@ -494,7 +494,7 @@ public class Parser {
             EQUALITY_2();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
@@ -524,7 +524,7 @@ public class Parser {
             COMPARISON_2();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
@@ -562,7 +562,7 @@ public class Parser {
             TERM_2();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
     }
@@ -592,7 +592,7 @@ public class Parser {
             FACTOR_2();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
 
@@ -629,7 +629,7 @@ public class Parser {
             CALL();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada ! - true false null this numero cadena identificador super ( .");
         }
 
@@ -645,7 +645,7 @@ public class Parser {
             CALL_2();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada  true false null this numero cadena identificador super ( .");
         }
     }
@@ -703,7 +703,7 @@ public class Parser {
             coincidir(identificador);
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada  true false null this numero cadena identificador super ( .");
         }
     }
@@ -719,7 +719,7 @@ public class Parser {
             BLOCK();
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea
+            System.out.println("Error en la línea " + preanalisis.linea
                     + ". Se esperaba la palabra reservada  true false null this numero cadena identificador super ( .");
         }
     }
@@ -783,7 +783,7 @@ public class Parser {
         } else {
             hayErrores = true;
             System.out.println(
-                    "Error en la posición " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
+                    "Error en la línea " + preanalisis.linea + ". Se esperaba la palabra reservada SELECT.");
         }
     }
 
@@ -806,7 +806,7 @@ public class Parser {
             preanalisis = tokens.get(i);
         } else {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.linea + ". Se esperaba un  " + t.tipo);
+            System.out.println("Error en la línea " + preanalisis.linea + ". Se esperaba un  " + t.tipo);
 
         }
     }

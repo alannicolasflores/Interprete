@@ -177,7 +177,7 @@ public class Parser {
                 || preanalisis.equals(False) || preanalisis.equals(Null) || preanalisis.equals(This)
                 || preanalisis.equals(numero) || preanalisis.equals(cadena) || preanalisis.equals(identificador)
                 || preanalisis.equals(Super) || preanalisis.equals(par1)) {
-            EXPRESSION();
+            EXPR_STMT();
         } else if (preanalisis.equals(For)) {
             FOR_STMT();
         } else if (preanalisis.equals(If)) {

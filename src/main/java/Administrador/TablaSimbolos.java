@@ -1,4 +1,4 @@
-package mx.ipn.escom.compiladores;
+package Administrador;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,5 +1,4 @@
-package mx.ipn.escom.compiladores;
-
+package Administrador;
 import java.util.ArrayList;
 import java.util.List;
 

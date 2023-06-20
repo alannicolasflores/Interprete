@@ -1,5 +1,4 @@
-package mx.ipn.escom.compiladores;
-
+package Administrador;
 import java.util.List;
 import java.util.Stack;
 
@@ -48,7 +47,7 @@ public class GeneradorAST {
                 }
                 pila.push(n);
             }
-            else if(t.tipo == TipoToken.SEMICOLON){
+            else if(t.tipo == TipoToken.PCOMA){
 
                 if (pila.isEmpty()){
                     /*
@@ -66,7 +65,7 @@ public class GeneradorAST {
                         En el caso del VAR, es necesario eliminar el igual que
                         pudiera aparecer en la raíz del nodo n.
                          */
-                        if(n.getValue().tipo == TipoToken.IGUAL){
+                        if(n.getValue().tipo == TipoToken.IGUAL1){
                             padre.insertarHijos(n.getHijos());
                         }
                         else{

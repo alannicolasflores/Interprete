@@ -37,6 +37,92 @@ public class Token {
 
         return false;
     }
+    public boolean esOperando(){
+        switch (this.tipo){
+            case IDENTIFICADOR:
+            case NUMERO:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean esOperador(){
+        switch (this.tipo){
+            case MAS:
+            case MENOS:
+            case POR:
+            case DIAG:
+            case IGUAL1:
+            case MAYOR:
+            case MAYORI:
+            case MENOR:
+            case MENORI:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean esPalabraReservada(){
+        switch (this.tipo){
+            case VAR:
+            case IF:
+            case PRINT:
+            case ELSE:
+            case FOR:
+            case WHILE:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean esEstructuraDeControl(){
+        switch (this.tipo){
+            case IF:
+            case ELSE:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean precedenciaMayorIgual(Token t){
+        return this.obtenerPrecedencia() >= t.obtenerPrecedencia();
+    }
+
+    private int obtenerPrecedencia(){
+        switch (this.tipo){
+            case POR:
+            case DIAG:
+                return 3;
+            case MAS:
+            case MENOS:
+                return 2;
+            case IGUAL1:
+                return 1;
+            case MAYOR:
+            case MAYORI:
+                return 1;
+        }
+
+        return 0;
+    }
+
+    public int aridad(){
+        switch (this.tipo) {
+            case POR:
+            case DIAG:
+            case MAS:
+            case MENOS:
+            case IGUAL1:
+            case MAYOR:
+            case MAYORI:
+                return 2;
+        }
+        return 0;
+    }
 
 
 

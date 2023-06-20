@@ -1,5 +1,4 @@
-package mx.ipn.escom.compiladores;
-
+package Administrador;
 public class SolverAritmetico {
 
     private final Nodo nodo;
@@ -31,18 +30,18 @@ public class SolverAritmetico {
 
         if(resultadoIzquierdo instanceof Double && resultadoDerecho instanceof Double){
             switch (n.getValue().tipo){
-                case SUMA:
+                case MAS:
                     return ((Double)resultadoIzquierdo + (Double) resultadoDerecho);
-                case RESTA:
+                case MENOS:
                     return ((Double)resultadoIzquierdo - (Double) resultadoDerecho);
-                case MULTIPLICACION:
+                case POR:
                     return ((Double)resultadoIzquierdo * (Double) resultadoDerecho);
-                case DIVISION:
+                case DIAG:
                     return ((Double)resultadoIzquierdo / (Double) resultadoDerecho);
             }
         }
         else if(resultadoIzquierdo instanceof String && resultadoDerecho instanceof String){
-            if (n.getValue().tipo == TipoToken.SUMA){
+            if (n.getValue().tipo == TipoToken.MAS){
                 // Ejecutar la concatenación
             }
         }

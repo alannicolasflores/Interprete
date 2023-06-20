@@ -256,8 +256,9 @@ public class Parser {
         if (preanalisis.equals(neg) || preanalisis.equals(menos) || preanalisis.equals(True)
                 || preanalisis.equals(False) || preanalisis.equals(Null) || preanalisis.equals(This)
                 || preanalisis.equals(numero) || preanalisis.equals(cadena) || preanalisis.equals(identificador)
-                || preanalisis.equals(Super) || preanalisis.equals(par1) || preanalisis.equals(pcoma)) {
+                || preanalisis.equals(Super) || preanalisis.equals(par1) ) {
             EXPRESSION();
+            coincidir(pcoma);
         } else if (preanalisis.equals(pcoma)) {
             coincidir(pcoma);
         } else {

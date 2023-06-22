@@ -18,15 +18,30 @@ public class Arbol {
                 case MENOS:
                 case POR:
                 case DIAG:
+                case OR:
+                case AND:
+                case MAYOR:
+                case MAYORI:
+                case MENORI:
+                case MENOR:
+                case IGUAL2:
+                case NEG:
+                case COMP:
+
                     SolverAritmetico solver = new SolverAritmetico(n);
                     Object res = solver.resolver();
                     System.out.println(res);
+
                 break;
 
                 case VAR:
                     // Crear una variable. Usar tabla de simbolos
                     break;
                 case IF:
+                    break;
+                case WHILE:
+                    break;
+                case FOR:
                     break;
 
             }

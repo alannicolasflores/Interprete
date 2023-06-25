@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+
 public class GeneradorPostfija {
 
     private final List<Token> infija;
@@ -52,7 +53,7 @@ public class GeneradorPostfija {
                     pila.pop();
                 }
                 if(estructuraDeControl){
-                    postfija.add(new Token(TipoToken.PCOMA, ";"));
+                    postfija.add(new Token(TipoToken.PCOMA, ";",null));
                 }
             }
             else if(t.esOperador()){
@@ -88,7 +89,7 @@ public class GeneradorPostfija {
                     // El cual servirá para indicar que se finaliza la estructura
                     // de control.
                     pila.pop();
-                    postfija.add(new Token(TipoToken.PCOMA, ";"));
+                    postfija.add(new Token(TipoToken.PCOMA, ";",null));
 
                     // Se extrae de la pila de estrucuras de control, el elemento en el tope
                     pilaEstructurasDeControl.pop();
@@ -107,7 +108,7 @@ public class GeneradorPostfija {
 
         while(!pilaEstructurasDeControl.isEmpty()){
             pilaEstructurasDeControl.pop();
-            postfija.add(new Token(TipoToken.PCOMA, ";"));
+            postfija.add(new Token(TipoToken.PCOMA, ";",null));
         }
 
         return postfija;

@@ -52,6 +52,7 @@ public class Interprete {
     }
 
     private static void ejecutar(String source){
+        TablaSimbolos tablaSimbolos = new TablaSimbolos();  // Crear instancia de TablaSimbolos
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
 

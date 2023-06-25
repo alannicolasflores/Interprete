@@ -6,10 +6,11 @@ public class GeneradorAST {
 
     private final List<Token> postfija;
     private final Stack<Nodo> pila;
-
-    public GeneradorAST(List<Token> postfija){
+    private final TablaSimbolos tablaSimbolos;
+    public GeneradorAST(List<Token> postfija,TablaSimbolos tablaSimbolos){
         this.postfija = postfija;
         this.pila = new Stack<>();
+        this.tablaSimbolos = tablaSimbolos;
     }
 
     public Arbol generarAST() {
@@ -88,7 +89,7 @@ public class GeneradorAST {
 
         // Suponiendo que en la pila sólamente queda un nodo
         // Nodo nodoAux = pila.pop();
-        Arbol programa = new Arbol(raiz);
+        Arbol programa = new Arbol(raiz,tablaSimbolos);
 
         return programa;
     }

@@ -1,6 +1,8 @@
 package Administrador;
+
 import java.util.ArrayList;
 import java.util.List;
+
 public class Arbol {
     private final Nodo raiz;
     private final TablaSimbolos tablaSimbolos;
@@ -27,7 +29,7 @@ public class Arbol {
                 case IGUAL2:
                 case NEG:
                 case COMP:
-                    SolverAritmetico solver = new SolverAritmetico(n);
+                    SolverAritmetico solver = new SolverAritmetico(n, tablaSimbolos);
                     Object res = solver.resolver();
                     System.out.println(res);
                     break;
@@ -50,6 +52,23 @@ public class Arbol {
                         System.out.println("El valor de la variable '" + nombre + "' es: " + valor);
                     } else {
                         System.out.println("Error: La variable '" + nombre + "' no existe.");
+                    }
+                    break;
+
+                case PRINT:
+                    for (Nodo hijo : n.getHijos()) {
+                        Token hijoToken = hijo.getValue();
+                        if (hijoToken.esOperando() || hijoToken.tipo == TipoToken.CADENA) {
+                            System.out.println(hijoToken.literal);
+                        } else if (hijoToken.tipo == TipoToken.IDENTIFICADOR) {
+                            String varNombre = hijoToken.lexema;
+                            if (tablaSimbolos.existeIdentificador(varNombre)) {
+                                Object varValor = tablaSimbolos.obtener(varNombre);
+                                System.out.println(varValor);
+                            } else {
+                                System.out.println("Error: La variable '" + varNombre + "' no existe.");
+                            }
+                        }
                     }
                     break;
 

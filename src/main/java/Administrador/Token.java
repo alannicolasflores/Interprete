@@ -8,7 +8,7 @@ package Administrador;
 
 public class Token {
     final TipoToken tipo;
-    final String lexema; 
+    final String lexema;
     final Object literal;
     final int linea;
 
@@ -101,23 +101,33 @@ public class Token {
         return this.obtenerPrecedencia() >= t.obtenerPrecedencia();
     }
 
-    private int obtenerPrecedencia(){
-        switch (this.tipo){
+    public int obtenerPrecedencia() {
+        switch (this.tipo) {
             case POR:
             case DIAG:
-                return 3;
+                return 7;
             case MAS:
             case MENOS:
+                return 6;
+            case MENOR:
+            case MENORI:
+            case MAYOR:
+            case MAYORI:
+                return 5;
+            case IGUAL2:
+            case COMP:
+                return 4;
+            case AND:
+                return 3;
+            case OR:
                 return 2;
             case IGUAL1:
                 return 1;
-            case MAYOR:
-            case MAYORI:
-                return 1;
+            default:
+                return 0;
         }
-
-        return 0;
     }
+
 
     public int aridad(){
         switch (this.tipo) {
@@ -137,5 +147,5 @@ public class Token {
 
     public String toString(){
         return tipo + " " + lexema + " " + literal;
-    } 
+    }
 }

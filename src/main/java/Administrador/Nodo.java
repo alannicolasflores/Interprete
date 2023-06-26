@@ -6,9 +6,11 @@ public class Nodo {
     private final Token value;
     private List<Nodo> hijos;
 
-    public Nodo(Token value){
+    public Nodo(Token value) {
         this.value = value;
+        this.hijos = new ArrayList<>();
     }
+
 
     public void insertarHijo(Nodo n){
         if(hijos == null){

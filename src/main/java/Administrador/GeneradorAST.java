@@ -59,31 +59,30 @@ public class GeneradorAST {
                      * que cierra una estructura de control.
                      */
                     pilaPadres.pop();  // Se remueve el padre actual de la pila
-                    padre = pilaPadres.peek();  // Se actualiza el padre actual
-
+                    if (!pilaPadres.isEmpty()) {
+                        padre = pilaPadres.peek();  // Se actualiza el padre actual solo si la pila de padres no está vacía
+                    }
                 } else {
                     Nodo n = pila.pop();  // Se obtiene el nodo de la pila
 
-                    if (padre.getValue().tipo == TipoToken.VAR) {
+                    if (padre.getValue() != null && padre.getValue().tipo == TipoToken.VAR) {
                         /*
                          * En el caso del VAR, es necesario eliminar el token igual que
                          * pudiera aparecer en la raíz del nodo n.
                          */
-                        if (n.getValue().tipo == TipoToken.IGUAL1) {
+                        if (n.getValue() != null && n.getValue().tipo == TipoToken.IGUAL1) {
                             padre.insertarHijos(n.getHijos());  // Se insertan los hijos en el padre
                         } else {
                             padre.insertarSiguienteHijo(n);  // Se inserta el nodo como siguiente hijo del padre
                         }
                         pilaPadres.pop();  // Se remueve el padre actual de la pila
-                        padre = pilaPadres.peek();  // Se actualiza el padre actual
+                        if (!pilaPadres.isEmpty()) {
+                            padre = pilaPadres.peek();  // Se actualiza el padre actual solo si la pila de padres no está vacía
+                        }
 
-                    } else if (padre.getValue().tipo == TipoToken.PRINT) {
-                        padre.insertarSiguienteHijo(n);  // Se inserta el nodo como siguiente hijo del padre
-                        pilaPadres.pop();  // Se remueve el padre actual de la pila
-                        padre = pilaPadres.peek();  // Se actualiza el padre actual
-
-                    } else {
-                        padre.insertarSiguienteHijo(n);  // Se inserta el nodo como siguiente hijo del padre
+                    } else if (padre.getValue() != null && (padre.getValue().tipo == TipoToken.PRINT || padre.getValue().tipo == TipoToken.IF || padre.getValue().tipo == TipoToken.ELSE || padre.getValue().tipo == TipoToken.WHILE)) {
+                        // En el caso de los nodos PRINT, IF, ELSE y WHILE, se inserta el nodo como siguiente hijo del padre
+                        padre.insertarSiguienteHijo(n);
                     }
                 }
             }

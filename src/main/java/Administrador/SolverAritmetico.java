@@ -101,4 +101,21 @@ public class SolverAritmetico {
 
         return null;
     }
+
+    private Object resolverValor(Nodo n) {
+        if (n.getValue().tipo == TipoToken.CADENA || n.getValue().tipo == TipoToken.NUMERO) {
+            return n.getValue().literal;
+        } else if (n.getValue().tipo == TipoToken.IDENTIFICADOR) {
+            String varNombre = n.getValue().lexema;
+            if (tablaSimbolos.existeIdentificador(varNombre)) {
+                return tablaSimbolos.obtener(varNombre);
+            } else {
+                throw new RuntimeException("Error: La variable '" + varNombre + "' no existe.");
+            }
+        } else {
+            // Resolver la expresión aritmética, lógica, etc.
+            SolverAritmetico solver = new SolverAritmetico(n, tablaSimbolos);
+            return solver.resolver();
+        }
+    }
 }

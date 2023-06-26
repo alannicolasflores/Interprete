@@ -33,10 +33,10 @@ public class Arbol {
                     Object res = solver.resolver();
                     System.out.println(res);
                     break;
-
                 case VAR:
                     String nombreVariable = n.getHijos().get(0).getValue().lexema;
-                    Object valorVariable = null;  // Obtén el valor de la variable según tu lógica
+                    Nodo valorNodo = n.getHijos().get(1);
+                    Object valorVariable = resolverValor(valorNodo);
 
                     if (tablaSimbolos.existeIdentificador(nombreVariable)) {
                         System.out.println("Error: La variable '" + nombreVariable + "' ya existe.");
@@ -48,8 +48,22 @@ public class Arbol {
                 case IDENTIFICADOR:
                     String nombre = t.lexema;
                     if (tablaSimbolos.existeIdentificador(nombre)) {
+                        // Obtener el valor actual de la variable
                         Object valor = tablaSimbolos.obtener(nombre);
-                        System.out.println("El valor de la variable '" + nombre + "' es: " + valor);
+
+                        if (valor instanceof String) {
+
+                            // Verificar si el nodo tiene hijos para reevaluar su valor
+                            if (n.getHijos() != null && n.getHijos().size() > 0) {
+                                valorNodo = n.getHijos().get(0);
+                                solver = new SolverAritmetico(valorNodo, tablaSimbolos);
+                                Object nuevoValor = solver.resolver();
+                                tablaSimbolos.asignar(nombre, nuevoValor);
+
+                            }
+                        } else {
+                            System.out.println("Error: El identificador '" + nombre + "' no es una cadena.");
+                        }
                     } else {
                         System.out.println("Error: La variable '" + nombre + "' no existe.");
                     }
@@ -58,7 +72,7 @@ public class Arbol {
                 case PRINT:
                     for (Nodo hijo : n.getHijos()) {
                         Token hijoToken = hijo.getValue();
-                        if (hijoToken.esOperando() || hijoToken.tipo == TipoToken.CADENA) {
+                        if (hijoToken.tipo == TipoToken.CADENA) {
                             System.out.println(hijoToken.literal);
                         } else if (hijoToken.tipo == TipoToken.IDENTIFICADOR) {
                             String varNombre = hijoToken.lexema;
@@ -68,9 +82,14 @@ public class Arbol {
                             } else {
                                 System.out.println("Error: La variable '" + varNombre + "' no existe.");
                             }
+                        } else {
+                            // Resolver el valor del nodo
+                            Object valor = resolverValor(hijo);
+                            System.out.println(valor);
                         }
                     }
                     break;
+
 
                 case IF:
                     // Implementa la lógica para el nodo IF
@@ -89,5 +108,10 @@ public class Arbol {
                     break;
             }
         }
+    }
+
+    private Object resolverValor(Nodo n) {
+        SolverAritmetico solver = new SolverAritmetico(n, tablaSimbolos);
+        return solver.resolver();
     }
 }

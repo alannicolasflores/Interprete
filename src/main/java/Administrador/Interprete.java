@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Interprete {
-   static boolean existenErrores = false;
+    static boolean existenErrores = false;
 
     public static void main(String[] args) throws IOException {
         if(args.length > 1) {
@@ -56,11 +56,22 @@ public class Interprete {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
 
-        for(Token token : tokens){
+       /* for(Token token : tokens){
             System.out.println(token);
-        }
+        }*/
         Parser parser = new Parser(tokens);
         parser.parse();
+        GeneradorPostfija gpf = new GeneradorPostfija(tokens);
+        List<Token> postfija = gpf.convertir();
+
+        /*for(Token token : postfija){
+            System.out.println(token);
+        }*/
+
+        GeneradorAST gast = new GeneradorAST(postfija,tablaSimbolos);
+
+        Arbol programa = gast.generarAST();
+        programa.recorrer();
     }
 
     /*
@@ -78,5 +89,5 @@ public class Interprete {
         );
         existenErrores = true;
     }
- 
+
 }

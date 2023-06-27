@@ -50,8 +50,13 @@ public class SolverAritmetico {
                 String nombreIdentificadorIzquierdo = ((Token) resultadoIzquierdo).lexema;
                 if (tablaSimbolos.existeIdentificador(nombreIdentificadorIzquierdo)) {
                     Object valorIdentificadorIzquierdo = tablaSimbolos.obtener(nombreIdentificadorIzquierdo);
-                    resultadoIzquierdo = resolver(new Nodo(new Token(TipoToken.IDENTIFICADOR, nombreIdentificadorIzquierdo)), valorIdentificadorIzquierdo);
-                    // Hacer algo con el resultado del identificador izquierdo
+                    if (valorIdentificadorIzquierdo instanceof String) {
+                        resultadoIzquierdo = resolver(new Nodo(new Token(TipoToken.CADENA, nombreIdentificadorIzquierdo, valorIdentificadorIzquierdo)));
+                    } else if (valorIdentificadorIzquierdo instanceof Double) {
+                        resultadoIzquierdo = resolver(new Nodo(new Token(TipoToken.NUMERO, nombreIdentificadorIzquierdo, valorIdentificadorIzquierdo)));
+                    } else {
+                        throw new RuntimeException("Error: El tipo del identificador '" + nombreIdentificadorIzquierdo + "' no es compatible.");
+                    }
                 } else {
                     throw new RuntimeException("Error: El identificador '" + nombreIdentificadorIzquierdo + "' no existe en la tabla de símbolos.");
                 }
@@ -62,8 +67,13 @@ public class SolverAritmetico {
                 String nombreIdentificadorDerecho = ((Token) resultadoDerecho).lexema;
                 if (tablaSimbolos.existeIdentificador(nombreIdentificadorDerecho)) {
                     Object valorIdentificadorDerecho = tablaSimbolos.obtener(nombreIdentificadorDerecho);
-                    resultadoDerecho = resolver(new Nodo(new Token(TipoToken.IDENTIFICADOR, nombreIdentificadorDerecho)), valorIdentificadorDerecho);
-                    // Hacer algo con el resultado del identificador derecho
+                    if (valorIdentificadorDerecho instanceof String) {
+                        resultadoDerecho = resolver(new Nodo(new Token(TipoToken.CADENA, nombreIdentificadorDerecho, valorIdentificadorDerecho)));
+                    } else if (valorIdentificadorDerecho instanceof Double) {
+                        resultadoDerecho = resolver(new Nodo(new Token(TipoToken.NUMERO, nombreIdentificadorDerecho, valorIdentificadorDerecho)));
+                    } else {
+                        throw new RuntimeException("Error: El tipo del identificador '" + nombreIdentificadorDerecho + "' no es compatible.");
+                    }
                 } else {
                     throw new RuntimeException("Error: El identificador '" + nombreIdentificadorDerecho + "' no existe en la tabla de símbolos.");
                 }
@@ -75,7 +85,17 @@ public class SolverAritmetico {
 
             // Verificar la aridad y precedencia
             if (aridad == 2 && precedencia > 0) {
-                // Operador binario
+                if (resultadoIzquierdo instanceof Integer || resultadoDerecho instanceof Integer) {
+                    if (resultadoIzquierdo instanceof Integer) {
+                        double resultadoIzquierdoDouble = ((Integer) resultadoIzquierdo).doubleValue();
+                        // Usa el resultadoIzquierdoDouble convertido a double según sea necesario
+                    }
+                    if (resultadoDerecho instanceof Integer) {
+                        double resultadoDerechoDouble = ((Integer) resultadoDerecho).doubleValue();
+                        // Usa el resultadoDerechoDouble convertido a double según sea necesario
+                    }
+                }
+
                 if (resultadoIzquierdo instanceof Double && resultadoDerecho instanceof Double) {
                     switch (n.getValue().tipo) {
                         case MAS:
@@ -146,6 +166,16 @@ public class SolverAritmetico {
         }
 
         return null; // Agrega esta línea para evitar el error
+    }
+    private TipoToken getTipoTokenFromValue(Object value) {
+        if (value instanceof Integer || value instanceof Double) {
+            return TipoToken.NUMERO;
+        } else if (value instanceof String) {
+            return TipoToken.CADENA;
+        } else if (value instanceof Boolean) {
+            return (Boolean) value ? TipoToken.TRUE : TipoToken.FALSE;
+        }
+        throw new RuntimeException("Error: Tipo de token desconocido para el valor " + value);
     }
 
 }

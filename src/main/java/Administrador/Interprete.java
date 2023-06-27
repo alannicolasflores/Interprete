@@ -51,11 +51,19 @@ public class Interprete {
     private static void ejecutar(String source, TablaSimbolos tablaSimbolos) {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
+        /*for(Token token : tokens){
+            System.out.println(token);
+        }*/
 
         Parser parser = new Parser(tokens);
         parser.parse();
+
         GeneradorPostfija gpf = new GeneradorPostfija(tokens);
+
         List<Token> postfija = gpf.convertir();
+        for(Token token : postfija){
+            System.out.println(token);
+        }
 
         GeneradorAST gast = new GeneradorAST(postfija, tablaSimbolos);
 

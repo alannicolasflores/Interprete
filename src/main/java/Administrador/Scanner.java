@@ -358,11 +358,12 @@ public class Scanner {
 
             } else if (cont - 1 < source.length() && Character.isDigit(source.charAt(cont - 1))) {
                 String aux = "";
+                Double auxD= (double) 0;
                 while ((cont - 1 < source.length()) && Character.isDigit(source.charAt(cont - 1))) {
                     aux = aux.concat(String.valueOf(source.charAt(cont - 1)));
                     if (cont == source.length()) { // Verifica si el número es el último carácter de la cadena de origen
-
-                        tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea));
+                        auxD= Double.parseDouble(aux);
+                        tokens.add(new Token(TipoToken.NUMERO, aux, auxD, linea));
                         cont++;
                         break;
                     } else if ((cont < source.length() && source.charAt(cont) == '.')
@@ -371,8 +372,8 @@ public class Scanner {
                         aux = aux.concat(String.valueOf(source.charAt(cont - 1)));
                     } else if (!Character.isDigit(source.charAt(cont))) { // Verifica si el siguiente carácter no es un
                                                                           // número
-
-                        tokens.add(new Token(TipoToken.NUMERO, aux, aux, linea));
+                        auxD= Double.parseDouble(aux);
+                        tokens.add(new Token(TipoToken.NUMERO, aux, auxD, linea));
                         cont++;
                         break;
                     }

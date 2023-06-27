@@ -79,7 +79,7 @@ public class GeneradorPostfija {
                 // del "}".
                 pila.push(t);
             }
-            else if(t.tipo == TipoToken.LLAVE2 && estructuraDeControl){
+            else if(t.tipo == TipoToken.LLAVE1 && estructuraDeControl){
 
                 // Primero verificar si hay un else:
                 if(infija.get(i + 1).tipo == TipoToken.ELSE){

@@ -15,147 +15,176 @@ public class Arbol {
     public void recorrer() {
         for (Nodo n : raiz.getHijos()) {
             Token t = n.getValue();
-            switch (t.tipo) {
-                case MAS:
-                case MENOS:
-                case POR:
-                case DIAG:
-                case OR:
-                case AND:
-                case MAYOR:
-                case MAYORI:
-                case MENORI:
-                case MENOR:
-                case IGUAL2:
-                case NEG:
-                case COMP:
-                    SolverAritmetico solver = new SolverAritmetico(n, tablaSimbolos);
-                    Object res = solver.resolver();
-                    System.out.println(res);
-                    break;
-                case VAR:
-                    if (n.getHijos() != null && n.getHijos().size() >= 2) {
-                        String nombreVariable = n.getHijos().get(0).getValue().lexema;
-                        Nodo valorNodo = n.getHijos().get(1);
-                        Object valorVariable = new SolverAritmetico(valorNodo, tablaSimbolos).resolver();
-                        if (tablaSimbolos.existeIdentificador(nombreVariable)) {
-                            tablaSimbolos.asignar(nombreVariable, valorVariable);
-                        } else {
-                            tablaSimbolos.asignar(nombreVariable, valorVariable);
-                        }
-                    } else {
-                        System.out.println("Error: La declaración de la variable está mal formada.");
-                    }
-                    break;
-                case IDENTIFICADOR:
-                    String nombre = t.lexema;
-                    if (tablaSimbolos.existeIdentificador(nombre)) {
-                        Object valor = tablaSimbolos.obtener(nombre);
-                        if (valor instanceof String) {
-                            if (n.getHijos() != null && !n.getHijos().isEmpty()) {
-                                Nodo valorNodo = n.getHijos().get(0);
-                                solver = new SolverAritmetico(valorNodo, tablaSimbolos);
-                                Object nuevoValor = solver.resolver();
-                                tablaSimbolos.asignar(nombre, nuevoValor);
+            if (t != null) {
+                switch (t.tipo) {
+                    case MAS:
+                    case MENOS:
+                    case POR:
+                    case DIAG:
+                    case OR:
+                    case AND:
+                    case MAYOR:
+                    case MAYORI:
+                    case MENORI:
+                    case MENOR:
+                    case IGUAL2:
+                    case NEG:
+                    case COMP:
+                        SolverAritmetico solver = new SolverAritmetico(n, tablaSimbolos);
+                        Object res = solver.resolver();
+                        System.out.println(res);
+                        break;
+                    case IGUAL1:
+                        // Reasignación de variables
+                        if (n.getHijos() != null && n.getHijos().size() >= 2) {
+                            String nombreVariable = n.getHijos().get(0).getValue().lexema;
+                            Nodo valorNodo = n.getHijos().get(1);
+                            Object nuevoValor = new SolverAritmetico(valorNodo, tablaSimbolos).resolver();
+                            if (tablaSimbolos.existeIdentificador(nombreVariable)) {
+                                tablaSimbolos.asignar(nombreVariable, nuevoValor);
+                            } else {
+                                throw new RuntimeException("Error: La variable '" + nombreVariable + "' no existe.");
                             }
                         } else {
-                            System.out.println("Error: El identificador '" + nombre + "' no es una cadena.");
+                            System.out.println("Error: La reasignación de la variable está mal formada.");
                         }
-                    } else {
-                        System.out.println("Error: La variable '" + nombre + "' no existe.");
-                    }
-                    break;
-                case PRINT:
-                    if (n.getHijos() != null && !n.getHijos().isEmpty()) {
-                        for (Nodo hijo : n.getHijos()) {
-                            Token hijoToken = hijo.getValue();
-                            if (hijoToken.tipo == TipoToken.CADENA) {
-                                System.out.println(hijoToken.literal);
-                            } else if (hijoToken.tipo == TipoToken.IDENTIFICADOR) {
-                                String varNombre = hijoToken.lexema;
-                                if (tablaSimbolos.existeIdentificador(varNombre)) {
-                                    Object varValor = tablaSimbolos.obtener(varNombre);
-                                    System.out.println(varValor);
-                                } else {
-                                    System.out.println("Error: La variable '" + varNombre + "' no existe.");
+                        break;
+                    case VAR:
+                        // Verifica si el nodo tiene al menos 2 hijos
+                        if (n.getHijos() != null && n.getHijos().size() >= 2) {
+                            String nombreVariable = n.getHijos().get(0).getValue().lexema;
+                            Nodo valorNodo = n.getHijos().get(1);
+                            // Resuelve el valor de la variable utilizando el SolverAritmetico
+                            Object valorVariable = new SolverAritmetico(valorNodo, tablaSimbolos).resolver();
+                            tablaSimbolos.asignar(nombreVariable, valorVariable);
+                        } else {
+                            System.out.println("Error: La declaración de la variable está mal formada.");
+                        }
+                        break;
+                    case PRINT:
+                        if (n.getHijos() != null && !n.getHijos().isEmpty()) {
+                            for (Nodo hijo : n.getHijos()) {
+                                evaluarNodo(hijo);
+                            }
+                        } else {
+                            System.out.println("Error: El comando PRINT no tiene ninguna expresión asociada.");
+                        }
+                        break;
+                    case IF:
+                        if (n.getHijos() != null && n.getHijos().size() == 2) {
+                            Nodo condicionNodo = n.getHijos().get(0);
+                            Nodo bloqueVerdaderoNodo = n.getHijos().get(1);
+
+                            SolverAritmetico condicionSolver = new SolverAritmetico(condicionNodo, tablaSimbolos);
+                            Object condicion = condicionSolver.resolver();
+
+                            if (condicion instanceof Boolean) {
+                                boolean condicionBool = (Boolean) condicion;
+
+                                if (condicionBool) {
+                                    // Ejecutar el bloque verdadero
+                                    Arbol bloqueVerdaderoArbol = new Arbol(bloqueVerdaderoNodo, tablaSimbolos);
+                                    bloqueVerdaderoArbol.recorrer();
                                 }
                             } else {
-                                solver = new SolverAritmetico(hijo, tablaSimbolos);
-                                Object valor = solver.resolver();
-                                System.out.println(valor);
-                            }
-                        }
-                    } else {
-                        System.out.println("Error: El comando PRINT no tiene ninguna expresión asociada.");
-                    }
-                    break;
-                case IF:
-                    if (n.getHijos() != null && n.getHijos().size() == 3) {
-                        Nodo condicionNodo = n.getHijos().get(0);
-                        Nodo bloqueVerdaderoNodo = n.getHijos().get(1);
-                        Nodo bloqueFalsoNodo = n.getHijos().get(2);
-
-                        SolverAritmetico condicionSolver = new SolverAritmetico(condicionNodo, tablaSimbolos);
-                        Object condicion = condicionSolver.resolver();
-
-                        if (condicion instanceof Boolean) {
-                            boolean condicionBool = (Boolean) condicion;
-
-                            if (condicionBool) {
-                                // Ejecutar el bloque verdadero
-                                Arbol bloqueVerdaderoArbol = new Arbol(bloqueVerdaderoNodo, tablaSimbolos);
-                                bloqueVerdaderoArbol.recorrer();
-                            } else {
-                                // Ejecutar el bloque falso
-                                Arbol bloqueFalsoArbol = new Arbol(bloqueFalsoNodo, tablaSimbolos);
-                                bloqueFalsoArbol.recorrer();
+                                System.out.println("Error: La condición del IF debe ser una expresión booleana.");
                             }
                         } else {
-                            System.out.println("Error: La condición del IF debe ser una expresión booleana.");
+                            System.out.println("Error: Estructura incorrecta para el nodo IF.");
                         }
-                    } else {
-                        System.out.println("Error: Estructura incorrecta para el nodo IF.");
-                    }
-                    break;
+                        break;
+                    case ELSE:
+                        if (n.getHijos() != null && n.getHijos().size() == 1) {
+                            Nodo bloqueElseNodo = n.getHijos().get(0);
 
-                case ELSE:
-                    if (n.getHijos() != null && n.getHijos().size() == 1) {
-                        Nodo bloqueElseNodo = n.getHijos().get(0);
-
-                        // Ejecutar el bloque del nodo ELSE
-                        Arbol bloqueElseArbol = new Arbol(bloqueElseNodo, tablaSimbolos);
-                        bloqueElseArbol.recorrer();
-                    } else {
-                        System.out.println("Error: Estructura incorrecta para el nodo ELSE.");
-                    }
-                    break;
-                case WHILE:
-                    if (n.getHijos() != null && n.getHijos().size() == 2) {
-                        Nodo condicionNodo = n.getHijos().get(0);
-                        Nodo bloqueWhileNodo = n.getHijos().get(1);
-
-                        // Evaluar la condición del WHILE
-                        SolverAritmetico solverCondicion = new SolverAritmetico(condicionNodo, tablaSimbolos);
-                        boolean condicion = (boolean) solverCondicion.resolver();
-
-                        // Ejecutar el bloque del WHILE mientras la condición sea verdadera
-                        while (condicion) {
-                            Arbol bloqueWhileArbol = new Arbol(bloqueWhileNodo, tablaSimbolos);
-                            bloqueWhileArbol.recorrer();
-
-                            // Volver a evaluar la condición del WHILE
-                            condicion = (boolean) solverCondicion.resolver();
+                            // Ejecutar el bloque del nodo ELSE
+                            Arbol bloqueElseArbol = new Arbol(bloqueElseNodo, tablaSimbolos);
+                            bloqueElseArbol.recorrer();
+                        } else {
+                            System.out.println("Error: Estructura incorrecta para el nodo ELSE.");
                         }
-                    } else {
-                        System.out.println("Error: Estructura incorrecta para el nodo WHILE.");
-                    }
-                    break;
+                        break;
+                    case WHILE:
+                        if (n.getHijos() != null && n.getHijos().size() == 2) {
+                            Nodo condicionNodo = n.getHijos().get(0);
+                            Nodo bloqueWhileNodo = n.getHijos().get(1);
 
-                case FOR:
-                    // Implementar la lógica para el nodo FOR
+                            // Evaluar la condición del WHILE
+                            SolverAritmetico solverCondicion = new SolverAritmetico(condicionNodo, tablaSimbolos);
+                            boolean condicion = (boolean) solverCondicion.resolver();
+
+                            // Ejecutar el bloque del WHILE mientras la condición sea verdadera
+                            while (condicion) {
+                                Arbol bloqueWhileArbol = new Arbol(bloqueWhileNodo, tablaSimbolos);
+                                bloqueWhileArbol.recorrer();
+
+                                // Volver a evaluar la condición del WHILE
+                                condicion = (boolean) solverCondicion.resolver();
+                            }
+                        } else {
+                            System.out.println("Error: Estructura incorrecta para el nodo WHILE.");
+                        }
+                        break;
+                    case FOR:
+                        if (n.getHijos() != null && n.getHijos().size() == 4) {
+                            Nodo inicializacionNodo = n.getHijos().get(0);
+                            Nodo condicionNodo = n.getHijos().get(1);
+                            Nodo incrementoNodo = n.getHijos().get(2);
+                            Nodo bloqueForNodo = n.getHijos().get(3);
+
+                            // Ejecutar la inicialización del FOR
+                            Arbol inicializacionArbol = new Arbol(inicializacionNodo, tablaSimbolos);
+                            inicializacionArbol.recorrer();
+
+                            // Evaluar la condición del FOR
+                            SolverAritmetico solverCondicion = new SolverAritmetico(condicionNodo, tablaSimbolos);
+                            boolean condicion = (boolean) solverCondicion.resolver();
+
+                            // Ejecutar el bloque del FOR mientras la condición sea verdadera
+                            while (condicion) {
+                                // Ejecutar el bloque del FOR
+                                Arbol bloqueForArbol = new Arbol(bloqueForNodo, tablaSimbolos);
+                                bloqueForArbol.recorrer();
+
+                                // Ejecutar el incremento del FOR
+                                Arbol incrementoArbol = new Arbol(incrementoNodo, tablaSimbolos);
+                                incrementoArbol.recorrer();
+
+                                // Volver a evaluar la condición del FOR
+                                condicion = (boolean) solverCondicion.resolver();
+                            }
+                        } else {
+                            System.out.println("Error: Estructura incorrecta para el nodo FOR.");
+                        }
+                        break;
+                    default:
+                        System.out.println("Token no reconocido: " + t.lexema);
+                        break;
+                }
+            }
+        }
+    }
+
+    private void evaluarNodo(Nodo nodo) {
+        Token t = nodo.getValue();
+        if (t != null) {
+            switch (t.tipo) {
+                case CADENA:
+                    System.out.println(t.literal);
+                    break;
+                case IDENTIFICADOR:
+                    String varNombre = t.lexema;
+                    if (tablaSimbolos.existeIdentificador(varNombre)) {
+                        Object varValor = tablaSimbolos.obtener(varNombre);
+                        System.out.println(varValor);
+                    } else {
+                        System.out.println("Error: La variable '" + varNombre + "' no existe.");
+                    }
                     break;
                 default:
-                    System.out.println("Token no reconocido: " + t.lexema);
+                    SolverAritmetico solver = new SolverAritmetico(nodo, tablaSimbolos);
+                    Object valor = solver.resolver();
+                    System.out.println(valor);
                     break;
             }
         }

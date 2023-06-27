@@ -66,7 +66,7 @@ public class Parser {
             System.out
                     .println("Error en la linea" + preanalisis.linea + ". No se esperaba el token " + preanalisis.tipo);
         } else if (!hayErrores && preanalisis.equals(finCadena)) {
-            System.out.println("Consulta válida");
+            //System.out.println("Consulta válida");
         }
 
         /*

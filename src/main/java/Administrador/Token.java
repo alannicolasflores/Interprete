@@ -8,8 +8,8 @@ package Administrador;
 
 public class Token {
     final TipoToken tipo;
-    final String lexema;
-    final Object literal;
+    String lexema;
+    Object literal;
     final int linea;
 
     public Token(TipoToken tipo, String lexema, Object literal, int linea) {

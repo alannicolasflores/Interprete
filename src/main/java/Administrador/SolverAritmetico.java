@@ -45,6 +45,30 @@ public class SolverAritmetico {
             Object resultadoIzquierdo = resolver(izq);
             Object resultadoDerecho = resolver(der);
 
+            if (resultadoIzquierdo instanceof Token && ((Token) resultadoIzquierdo).tipo == TipoToken.IDENTIFICADOR) {
+                // El resultado izquierdo es un identificador
+                String nombreIdentificadorIzquierdo = ((Token) resultadoIzquierdo).lexema;
+                if (tablaSimbolos.existeIdentificador(nombreIdentificadorIzquierdo)) {
+                    Object valorIdentificadorIzquierdo = tablaSimbolos.obtener(nombreIdentificadorIzquierdo);
+                    resultadoIzquierdo = resolver(new Nodo(new Token(TipoToken.IDENTIFICADOR, nombreIdentificadorIzquierdo)), valorIdentificadorIzquierdo);
+                    // Hacer algo con el resultado del identificador izquierdo
+                } else {
+                    throw new RuntimeException("Error: El identificador '" + nombreIdentificadorIzquierdo + "' no existe en la tabla de símbolos.");
+                }
+            }
+
+            if (resultadoDerecho instanceof Token && ((Token) resultadoDerecho).tipo == TipoToken.IDENTIFICADOR) {
+                // El resultado derecho es un identificador
+                String nombreIdentificadorDerecho = ((Token) resultadoDerecho).lexema;
+                if (tablaSimbolos.existeIdentificador(nombreIdentificadorDerecho)) {
+                    Object valorIdentificadorDerecho = tablaSimbolos.obtener(nombreIdentificadorDerecho);
+                    resultadoDerecho = resolver(new Nodo(new Token(TipoToken.IDENTIFICADOR, nombreIdentificadorDerecho)), valorIdentificadorDerecho);
+                    // Hacer algo con el resultado del identificador derecho
+                } else {
+                    throw new RuntimeException("Error: El identificador '" + nombreIdentificadorDerecho + "' no existe en la tabla de símbolos.");
+                }
+            }
+
             // Obtener aridad y precedencia del operador actual
             int aridad = n.getValue().aridad();
             int precedencia = n.getValue().obtenerPrecedencia();
@@ -123,4 +147,6 @@ public class SolverAritmetico {
 
         return null; // Agrega esta línea para evitar el error
     }
+
 }
+

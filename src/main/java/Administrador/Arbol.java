@@ -39,8 +39,8 @@ public class Arbol {
                         if (n.getHijos() != null && n.getHijos().size() >= 2) {
                             String nombreVariable = n.getHijos().get(0).getValue().lexema;
                             Nodo valorNodo = n.getHijos().get(1);
-                            Object nuevoValor = new SolverAritmetico(valorNodo, tablaSimbolos).resolver();
                             if (tablaSimbolos.existeIdentificador(nombreVariable)) {
+                                Object nuevoValor = new SolverAritmetico(valorNodo, tablaSimbolos).resolver();
                                 tablaSimbolos.asignar(nombreVariable, nuevoValor);
                             } else {
                                 throw new RuntimeException("Error: La variable '" + nombreVariable + "' no existe.");
@@ -54,9 +54,11 @@ public class Arbol {
                         if (n.getHijos() != null && n.getHijos().size() >= 2) {
                             String nombreVariable = n.getHijos().get(0).getValue().lexema;
                             Nodo valorNodo = n.getHijos().get(1);
+
                             // Resuelve el valor de la variable utilizando el SolverAritmetico
-                            Object valorVariable = new SolverAritmetico(valorNodo, tablaSimbolos).resolver();
-                            tablaSimbolos.asignar(nombreVariable, valorVariable);
+                                Object valorVariable = new SolverAritmetico(valorNodo, tablaSimbolos).resolver();
+                                tablaSimbolos.asignar(nombreVariable, valorVariable);
+
                         } else {
                             System.out.println("Error: La declaración de la variable está mal formada.");
                         }
@@ -189,4 +191,6 @@ public class Arbol {
             }
         }
     }
+
+
 }

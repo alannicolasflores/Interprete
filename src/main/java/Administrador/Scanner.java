@@ -238,78 +238,54 @@ public class Scanner {
                     tokens.add(new Token(TipoToken.AND, "and", null, linea));
                     cont = cont + 3;
 
-                } else
-
-                if (source.length() - cont > 2 && source.charAt(cont - 1) == 'e' && source.charAt(cont) == 'l'
+                } else if (source.length() - cont > 2 && source.charAt(cont - 1) == 'e' && source.charAt(cont) == 'l'
                         && source.charAt(cont + 1) == 's' && source.charAt(cont + 2) == 'e') {
                     tokens.add(new Token(TipoToken.ELSE, "else", null, linea));
                     cont = cont + 4;
-                } else
-
-                if (source.length() - cont > 3 && source.charAt(cont - 1) == 'c' && source.charAt(cont) == 'l'
+                } else if (source.length() - cont > 3 && source.charAt(cont - 1) == 'c' && source.charAt(cont) == 'l'
                         && source.charAt(cont + 1) == 'a' && source.charAt(cont + 2) == 's'
                         && source.charAt(cont + 3) == 's') {
                     tokens.add(new Token(TipoToken.CLASS, "class", null, linea));
                     cont = cont + 5;
-                } else
-
-                if (source.length() - cont > 3 && source.charAt(cont - 1) == 'f' && source.charAt(cont) == 'a'
+                } else if (source.length() - cont > 3 && source.charAt(cont - 1) == 'f' && source.charAt(cont) == 'a'
                         && source.charAt(cont + 1) == 'l' && source.charAt(cont + 2) == 's'
                         && source.charAt(cont + 3) == 'e') {
                     tokens.add(new Token(TipoToken.FALSE, "false", null, linea));
                     cont = cont + 5;
-                } else
-
-                if (source.length() - cont > 1 && source.charAt(cont - 1) == 'f' && source.charAt(cont) == 'u'
+                } else if (source.length() - cont > 1 && source.charAt(cont - 1) == 'f' && source.charAt(cont) == 'u'
                         && source.charAt(cont + 1) == 'n') {
                     tokens.add(new Token(TipoToken.FUN, "fun", null, linea));
                     cont = cont + 3;
-                } else
-
-                if (source.length() - cont > 0 && source.charAt(cont - 1) == 'i' && source.charAt(cont) == 'f') {
+                } else if (source.length() - cont > 0 && source.charAt(cont - 1) == 'i' && source.charAt(cont) == 'f') {
                     tokens.add(new Token(TipoToken.IF, "if", null, linea));
                     cont = cont + 2;
-                } else
-
-                if (source.length() - cont > 2 && source.charAt(cont - 1) == 'n' && source.charAt(cont) == 'u'
+                } else if (source.length() - cont > 2 && source.charAt(cont - 1) == 'n' && source.charAt(cont) == 'u'
                         && source.charAt(cont + 1) == 'l' && source.charAt(cont + 2) == 'l') {
                     tokens.add(new Token(TipoToken.NULL, "null", null, linea));
                     cont = cont + 4;
-                } else
-
-                if (source.length() - cont > 0 && source.charAt(cont - 1) == 'o' && source.charAt(cont) == 'r') {
+                } else if (source.length() - cont > 0 && source.charAt(cont - 1) == 'o' && source.charAt(cont) == 'r') {
                     tokens.add(new Token(TipoToken.OR, "or", null, linea));
                     cont = cont + 2;
-                } else
-
-                if (source.length() - cont > 3 && source.charAt(cont - 1) == 'p' && source.charAt(cont) == 'r'
+                } else if (source.length() - cont > 3 && source.charAt(cont - 1) == 'p' && source.charAt(cont) == 'r'
                         && source.charAt(cont + 1) == 'i' && source.charAt(cont + 2) == 'n'
                         && source.charAt(cont + 3) == 't') {
                     tokens.add(new Token(TipoToken.PRINT, "print", null, linea));
                     cont = cont + 5;
-                } else
-
-                if (source.length() - cont > 4 && source.charAt(cont - 1) == 'r' && source.charAt(cont) == 'e'
+                } else if (source.length() - cont > 4 && source.charAt(cont - 1) == 'r' && source.charAt(cont) == 'e'
                         && source.charAt(cont + 1) == 't' && source.charAt(cont + 2) == 'u'
                         && source.charAt(cont + 3) == 'r' && source.charAt(cont + 4) == 'n') {
                     tokens.add(new Token(TipoToken.RETURN, "return", null, linea));
                     cont = cont + 6;
-                } else
-
-                if (source.length() - cont > 3 && source.charAt(cont - 1) == 's' && source.charAt(cont) == 'u'
+                } else if (source.length() - cont > 3 && source.charAt(cont - 1) == 's' && source.charAt(cont) == 'u'
                         && source.charAt(cont + 1) == 'p' && source.charAt(cont + 2) == 'e'
                         && source.charAt(cont + 3) == 'r') {
                     tokens.add(new Token(TipoToken.SUPER, "super", null, linea));
                     cont = cont + 5;
-                } else
-
-                if (source.length() - cont > 0 && source.charAt(cont - 1) == 'f' && source.charAt(cont) == 'o'
+                } else if (source.length() - cont > 0 && source.charAt(cont - 1) == 'f' && source.charAt(cont) == 'o'
                         && source.charAt(cont + 1) == 'r') {
                     tokens.add(new Token(TipoToken.FOR, "for", null, linea));
                     cont = cont + 3;
-                } else
-
-                if (source.length() - cont > 2 && source.charAt(cont - 1) == 't' && source.charAt(cont) == 'r'
+                } else if (source.length() - cont > 2 && source.charAt(cont - 1) == 't' && source.charAt(cont) == 'r'
                         && source.charAt(cont + 1) == 'u' && source.charAt(cont + 2) == 'e') {
                     tokens.add(new Token(TipoToken.TRUE, "true", null, linea));
                     cont = cont + 4;
@@ -317,9 +293,7 @@ public class Scanner {
                         && source.charAt(cont + 1) == 'i' && source.charAt(cont + 2) == 's') {
                     tokens.add(new Token(TipoToken.THIS, "this", null, linea));
                     cont = cont + 4;
-                } else
-
-                if (source.length() - cont > 1 && source.charAt(cont - 1) == 'v' && source.charAt(cont) == 'a'
+                } else if (source.length() - cont > 1 && source.charAt(cont - 1) == 'v' && source.charAt(cont) == 'a'
                         && source.charAt(cont + 1) == 'r' && source.charAt(cont + 2) == ' ') {
                     tokens.add(new Token(TipoToken.VAR, "var", null, linea));
                     cont = cont + 4;
@@ -334,7 +308,7 @@ public class Scanner {
                             || Character.isDigit(source.charAt(cont - 1)))) {
                         aux = aux.concat(String.valueOf(source.charAt(cont - 1)));
                         if (cont == source.length()) { // Verifica si el número es el último carácter de la cadena de
-                                                       // origen
+                            // origen
                             cont++;
                             tokens.add(new Token(TipoToken.IDENTIFICADOR, aux, null, linea));
                             cont++;
@@ -346,7 +320,7 @@ public class Scanner {
                             break;
                         } else if (!(Character.isDigit(source.charAt(cont))
                                 || Character.isLetter(source.charAt(cont)))) { // Verifica si el siguiente carácter no
-                                                                               // es un número
+                            // es un número
 
                             tokens.add(new Token(TipoToken.IDENTIFICADOR, aux, null, linea));
                             cont++;
@@ -357,72 +331,72 @@ public class Scanner {
                     }
 
             } else if (cont - 1 < source.length() && Character.isDigit(source.charAt(cont - 1))) {
-                String aux = "";
-                Double auxD= (double) 0;
-                while ((cont - 1 < source.length()) && Character.isDigit(source.charAt(cont - 1))) {
-                    aux = aux.concat(String.valueOf(source.charAt(cont - 1)));
-                    if (cont == source.length()) { // Verifica si el número es el último carácter de la cadena de origen
-                        auxD= Double.parseDouble(aux);
-                        tokens.add(new Token(TipoToken.NUMERO, aux, auxD, linea));
-                        cont++;
-                        break;
-                    } else if ((cont < source.length() && source.charAt(cont) == '.')
-                            || (cont < source.length() && source.charAt(cont) == ',')) {
-                        cont++;
+                    String aux = "";
+                    Double auxD= (double) 0;
+                    while ((cont - 1 < source.length()) && Character.isDigit(source.charAt(cont - 1))) {
                         aux = aux.concat(String.valueOf(source.charAt(cont - 1)));
-                    } else if (!Character.isDigit(source.charAt(cont))) { // Verifica si el siguiente carácter no es un
-                                                                          // número
-                        auxD= Double.parseDouble(aux);
-                        tokens.add(new Token(TipoToken.NUMERO, aux, auxD, linea));
-                        cont++;
-                        break;
-                    }
+                        if (cont == source.length()) { // Verifica si el número es el último carácter de la cadena de origen
+                            auxD= Double.parseDouble(aux);
+                            tokens.add(new Token(TipoToken.NUMERO, aux, auxD, linea));
+                            cont++;
+                            break;
+                        } else if ((cont < source.length() && source.charAt(cont) == '.')
+                                || (cont < source.length() && source.charAt(cont) == ',')) {
+                            cont++;
+                            aux = aux.concat(String.valueOf(source.charAt(cont - 1)));
+                        } else if (!Character.isDigit(source.charAt(cont))) { // Verifica si el siguiente carácter no es un
+                            // número
+                            auxD= Double.parseDouble(aux);
+                            tokens.add(new Token(TipoToken.NUMERO, aux, auxD, linea));
+                            cont++;
+                            break;
+                        }
 
-                    cont++;
+                        cont++;
+
+                    }
 
                 }
 
             }
+            /*
+             * Analizar el texto de entrada para extraer todos los tokens
+             * y al final agregar el token de fin de archivo
+             */
+            tokens.add(new Token(TipoToken.EOF, "", null, linea));
+            // literal es una expresion regular
+            // lexema es el string al cual es igual
+            // linea: es un contador de palabras
 
+            return tokens;
         }
-        /*
-         * Analizar el texto de entrada para extraer todos los tokens
-         * y al final agregar el token de fin de archivo
-         */
-        tokens.add(new Token(TipoToken.EOF, "", null, linea));
-        // literal es una expresion regular
-        // lexema es el string al cual es igual
-        // linea: es un contador de palabras
-
-        return tokens;
     }
-}
 
-/*
- * Signos o símbolos del lenguaje:
- * (
- * )
- * {
- * }
- * ,
- * .
- * ;
- * -
- * +
- *
- * /
- * !
- * !=
- * =
- * ==
- * <
- * <=
- * >
- * >=
- * // -> comentarios (no se genera token)
- * /* ... * / -> comentarios (no se genera token)
- * Identificador,
- * Cadena
- * Numero
- * Cada palabra reservada tiene su nombre de token
- */
+    /*
+     * Signos o símbolos del lenguaje:
+     * (
+     * )
+     * {
+     * }
+     * ,
+     * .
+     * ;
+     * -
+     * +
+     *
+     * /
+     * !
+     * !=
+     * =
+     * ==
+     * <
+     * <=
+     * >
+     * >=
+     * // -> comentarios (no se genera token)
+     * /* ... * / -> comentarios (no se genera token)
+     * Identificador,
+     * Cadena
+     * Numero
+     * Cada palabra reservada tiene su nombre de token
+     */
